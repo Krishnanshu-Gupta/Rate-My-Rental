@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "node start.js",
-    "debug": "node --no-lazy --inspect-brk=9229 start.js"
+    "debug": "node --inspect start.js "
   },
   "author": "",
   "license": "ISC",

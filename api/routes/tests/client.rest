@@ -1,0 +1,33 @@
+###
+POST http://localhost:3000/login HTTP/1.1
+Content-Type: application/json
+
+    {
+        "email": "test@test.com",
+        "password": "password"
+    }
+
+###
+GET http://localhost:3000/todos HTTP/1.1
+
+###
+# @name createToDo
+@todoId = {{createToDo.response.body.$.id}}
+POST http://localhost:3000/todos HTTP/1.1
+Content-Type: application/json
+
+    {
+        "task": "create todolist"
+    }
+
+###
+PUT http://localhost:3000/todos/{{todoId}} HTTP/1.1
+Content-Type: application/json
+
+    {
+        "task": "create todolist updated",
+        "done": true
+    }
+
+###
+DELETE http://localhost:3000/todos/14 HTTP/1.1

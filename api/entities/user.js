@@ -1,16 +1,17 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { ToDo } from './todo';
 
 @Entity()
-export default class User {
-  @PrimaryGeneratedColumn()
-  id
+export class User {
+    @PrimaryGeneratedColumn()
+    id
 
-  @Column({ type: 'varchar', unique: true })
-  email
+    @Column({ type: 'varchar', unique: true })
+    email
 
-  @Column({ type: 'varchar', nullable: false })
-  password
+    @Column({ type: 'varchar', nullable: false })
+    password
 
-  @Column({ type: 'varchar', nullable: false })
-  firstName
+    @OneToMany(() => ToDo, (todo) => todo.user) 
+    todos
 }

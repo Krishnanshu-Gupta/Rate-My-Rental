@@ -1,9 +1,8 @@
 // we import passport packages required for authentication
 import PassportLocal from 'passport-local';
 import passport from 'passport';
-import { DataSource } from 'typeorm';
 
-import User from '../entities/user';
+import { User } from '../entities/user';
 
 const init = (DataSource) => {
   // Telling passport we want to use a Local Strategy. In other words,
@@ -34,14 +33,17 @@ const init = (DataSource) => {
   // Sequelize needs to serialize and deserialize the user
   // Just consider this part boilerplate needed to make it all work
   passport.serializeUser((user, done) => {
-    done(null, user.id);
+    process.nextTick(() => {
+      done(null, user.id)
+    });
   });
   //
-  passport.deserializeUser((id, done) => getRepository(User).findOneOrFail(id).then(
-    (foundUser) => {
-      done(null, foundUser);
-    },
-  ));
+  passport.deserializeUser((id, done) => {
+    DataSource.getRepository(User).findOneOrFail({where: { id }}).then(
+      (foundUser) => {
+        done(null, foundUser);
+      },
+    )});
 };
 //
 // Exporting our configured passport

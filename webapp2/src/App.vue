@@ -1,6 +1,6 @@
 <script setup>
   import { RouterLink, RouterView } from 'vue-router'
-  import { reactive } from 'vue';
+  import { reactive, onMounted } from 'vue';
   import HelloWorld from './components/HelloWorld.vue'
   import { useUserStore } from '@/stores/user';
   
@@ -14,10 +14,16 @@
   
   function login() {
     const { email, password } = state;
-    store.login({email, password}).then(() => {
-      state.dialog = false;
+    store.login({email, password}).then((error) => {
+      if (!error) {
+        state.dialog = false;
+      }
     });
   }
+
+  onMounted(() => {
+    store.ping();
+  });
 </script>
 
 <template>
@@ -30,6 +36,7 @@
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/todos" v-if="store.loggedIn">Todos</RouterLink>
         <v-btn>Login
           <v-dialog
             v-model="state.dialog"
@@ -37,7 +44,14 @@
             width="400">
             <v-card>
               <v-card-text>
-                <v-form>
+                <v-alert
+                  density="compact"
+                  type="warning"
+                  icon="$warning"
+                  title="There was an issue logging in."
+                  v-if="store.hasError"
+                >{{ store.error }}</v-alert>
+                <v-form class="mt-2">
                   <v-text-field
                     label="Email address"
                     type="email"
