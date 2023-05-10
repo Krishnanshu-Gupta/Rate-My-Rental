@@ -1,11 +1,10 @@
-# MERN Basics
-### [YouTube Link](https://www.youtube.com/watch?v=I7EDAR2GRVo)
-It comprises of `MongoDB`, `Express`, `React` and `Node`. <br><br>
-Of which `React` is used for **front-end development** <br>
-And `MongoDB`, `Express`, `Node` for **back-end development**
+1. Open backend in one termind (cd server)
+2. Create a new file called .env
+3. Paste this in the .env file with the MondoDB connection string URI:
+     REACT_APP_MONGO_URI="MondoDB connection string URI goes here"
+4. npm install
+5. npm start
 
-## Getting Started
-### Follow these steps while starting the project
 
 ###### 1.  Create two Folders
 
