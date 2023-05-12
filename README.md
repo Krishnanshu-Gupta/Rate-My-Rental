@@ -7,4 +7,4 @@
 5. npm start
 
 ###### For Client (Frontend)
-`1. npm start`
+1. npm start
