@@ -1,68 +1,21 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import Axios from "axios";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import WriteReview from "./pages/writeReview";
+import Home from "./pages/Home";
 
 function App() {
-  const [listOfUsers, setListOfUsers] = useState([]);
-  const [name, setName] = useState("");
-  const [age, setAge] = useState(0);
-  const [username, setUsername] = useState("");
-
-  useEffect(() => {
-    Axios.get("http://localhost:3001/getUsers").then((response) => {
-      setListOfUsers(response.data);
-    });
-  }, []);
-
-  const createUser = () => {
-    Axios.post("http://localhost:3001/createUser", {
-      name,
-      age,
-      username,
-    }).then((response) => {
-      setListOfUsers([
-        ...listOfUsers,
-        {
-          name,
-          age,
-          username,
-        },
-      ]);
-    });
-  };
-
   return (
-    <div className="App">
-      <h1 className="title">RateMyRental</h1>
-      <div className="moto">
-        <h2>No more bad landlords, With your help.</h2>
-        <h2>Where renters and properties meet excellence.</h2>
+    <Router>
+      <div className="page-container">
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/write-review" element={<WriteReview />} />
+        </Routes>
       </div>
-      <div className="signup">
-        <input
-          type="text"
-          placeholder="Name..."
-          onChange={(event) => {
-            setName(event.target.value);
-          }}
-        />
-        <input
-          type="number"
-          placeholder="Age..."
-          onChange={(event) => {
-            setAge(event.target.value);
-          }}
-        />
-        <input
-          type="text"
-          placeholder="Username..."
-          onChange={(event) => {
-            setUsername(event.target.value);
-          }}
-        />
-        <button onClick={createUser}> Sign Up </button>
-      </div>
-    </div>
+    </Router>
   );
 }
 
