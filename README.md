@@ -8,4 +8,5 @@
 
 ###### For Client (Frontend)
 1. Open frontend in a seperate terminal (cd client)
-1. run `npm start`
+2. run `npm install`
+3. run `npm start`
