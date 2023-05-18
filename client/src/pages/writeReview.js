@@ -10,14 +10,21 @@ function WriteReview() {
     country: '',
     zipCode: '',
   });
+  const [overallRating, setOverallRating] = useState(0);
   const [healthAndSafetyRating, setHealthAndSafetyRating] = useState(0);
   const [repairsRating, setRepairsRating] = useState(0);
   const [respectRating, setRespectRating] = useState(0);
+  const [locationRating, setLocationRating] = useState(0);
+  const [amenitiesRating, setAmenitiesRating] = useState(0);
   const [writtenReview, setWrittenReview] = useState("");
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormValues({ ...formValues, [name]: value });
+  };
+
+  const handleOverallRating = (rating) => {
+    setOverallRating(rating);
   };
   const handleHealthAndSafetyRating = (rating) => {
     setHealthAndSafetyRating(rating);
@@ -31,6 +38,14 @@ function WriteReview() {
     setRespectRating(rating);
   };
 
+  const handleLocationRating = (rating) => {
+    setLocationRating(rating);
+  };
+
+  const handleAmenitiesRating = (rating) => {
+    setAmenitiesRating(rating);
+  };
+
   const handleWrittenReviewChange = (event) => {
     setWrittenReview(event.target.value);
   };  
@@ -39,9 +54,12 @@ function WriteReview() {
     event.preventDefault();
     console.log("In Handle Submit");
     console.log("Form Values:", formValues);
+    console.log("OveralRating:", overallRating)
     console.log("Health&Safety:", healthAndSafetyRating)
     console.log("repairsRating:", repairsRating)
     console.log("respectRating:", respectRating)
+    console.log("locationRating:", locationRating)
+    console.log("amenitiesRating:", amenitiesRating)
     console.log("writtenReview:", writtenReview)
     // submit to backend!
   };
@@ -125,6 +143,24 @@ function WriteReview() {
 
         <div>
       <h2>Review Your Stay</h2>
+      <div className="rating-section">
+          <h3>Overall Rating</h3>
+          <p>Give your overall rating of this location!</p>
+          <div className="rating-buttons">
+            {[1, 2, 3, 4, 5].map((rating) => (
+              <button
+                key={rating}
+                className={`rating-button ${
+                  overallRating === rating ? "selected" : ""
+                }`}
+                type="button"
+                onClick={() => handleOverallRating(rating)}
+              >
+                {rating}
+              </button>
+            ))}
+          </div>
+        </div>
         <div className="rating-section">
           <h3>Health and Safety</h3>
           <p>Complies with local health and safety standards</p>
@@ -181,6 +217,42 @@ function WriteReview() {
             ))}
           </div>
         </div>
+        <div className="rating-section">
+          <h3>Location</h3>
+          <p>Has an ideal location relative to most other properties in town</p>
+          <div className="rating-buttons">
+            {[1, 2, 3, 4, 5].map((rating) => (
+              <button
+                key={rating}
+                className={`rating-button ${
+                  locationRating === rating ? "selected" : ""
+                }`}
+                type="button"
+                onClick={() => handleLocationRating(rating)}
+              >
+                {rating}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="rating-section">
+          <h3>Amenities</h3>
+          <p>Additions that are in excess of the basic needs (pools, workout facilities, internet, etc.)</p>
+          <div className="rating-buttons">
+            {[1, 2, 3, 4, 5].map((rating) => (
+              <button
+                key={rating}
+                className={`rating-button ${
+                  amenitiesRating === rating ? "selected" : ""
+                }`}
+                type="button"
+                onClick={() => handleAmenitiesRating(rating)}
+              >
+                {rating}
+              </button>
+            ))}
+          </div>
+        </div>
         <div className="review-section">
           <h3>Written Review</h3>
           <textarea
@@ -198,123 +270,7 @@ function WriteReview() {
 
     </div>
   );
-// const [healthAndSafetyRating, setHealthAndSafetyRating] = useState(0);
-//   const [repairsRating, setRepairsRating] = useState(0);
-//   const [respectRating, setRespectRating] = useState(0);
-//   const [writtenReview, setWrittenReview] = useState("");
 
-//   const handleHealthAndSafetyRating = (rating) => {
-//     setHealthAndSafetyRating(rating);
-//   };
-
-//   const handleRepairsRating = (rating) => {
-//     setRepairsRating(rating);
-//   };
-
-//   const handleRespectRating = (rating) => {
-//     setRespectRating(rating);
-//   };
-
-//   const handleWrittenReviewChange = (event) => {
-//     setWrittenReview(event.target.value);
-//   };
-
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     // TODO: save the review data to state or send it to a backend server
-//     console.log({
-//       healthAndSafetyRating,
-//       repairsRating,
-//       respectRating,
-//       writtenReview,
-//     });
-//   };
-
-//   return (
-//     <div className="container">
-//       <h1>Review Your Stay</h1>
-//       <form onSubmit={handleSubmit}>
-//         <div className="rating-section">
-//           <h3>Health and Safety</h3>
-//           <p>Complies with local health and safety standards</p>
-//           <div className="rating-buttons">
-//             {[1, 2, 3, 4, 5].map((rating) => (
-//               <button
-//                 key={rating}
-//                 className={`rating-button ${
-//                   healthAndSafetyRating === rating ? "selected" : ""
-//                 }`}
-//                 type="button"
-//                 onClick={() => handleHealthAndSafetyRating(rating)}
-//               >
-//                 {rating}
-//               </button>
-//             ))}
-//           </div>
-//         </div>
-//         <div className="rating-section">
-//           <h3>Repairs</h3>
-//           <p>Kept the premises safe and in good condition</p>
-//           <div className="rating-buttons">
-//             {[1, 2, 3, 4, 5].map((rating) => (
-//               <button
-//                 key={rating}
-//                 className={`rating-button ${
-//                   repairsRating === rating ? "selected" : ""
-//                 }`}
-//                 type="button"
-//                 onClick={() => handleRepairsRating(rating)}
-//               >
-//                 {rating}
-//               </button>
-//             ))}
-//           </div>
-//         </div>
-//         <div className="rating-section">
-//           <h3>Respect</h3>
-//           <p>
-//             Respect the tenant and their privacy, and act in a cordial manner.
-//           </p>
-//           <div className="rating-buttons">
-//             {[1, 2, 3, 4, 5].map((rating) => (
-//               <button
-//                 key={rating}
-//                 className={`rating-button ${
-//                   respectRating === rating ? "selected" : ""
-//                 }`}
-//                 type="button"
-//                 onClick={() => handleRespectRating(rating)}
-//               >
-//                 {rating}
-//               </button>
-//             ))}
-//           </div>
-//         </div>
-//         <div className="review-section">
-//           <h3>Written Review</h3>
-//           <textarea
-//             className="review-textarea"
-//             value={writtenReview}
-//             onChange={handleWrittenReviewChange}
-//           />
-//         </div>
-//         <button className="submit-button" type="submit">
-//           Submit Review
-//         </button>
-//       </form>
-//     </div>
-//   );
 }
 
 export default WriteReview;
-
-
-
-// <div className="review-section">
-// <h2>Review Your Stay</h2>
-// {/* Add review form here */}
-// </div>
-
-// <button type="submit" className="btn btn-primary">
-// Submit
-// </button>
