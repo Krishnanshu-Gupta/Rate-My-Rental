@@ -66,8 +66,7 @@ function WriteReview() {
 
   return (
     <div className="container">
-      <h1>Rate My Rental</h1>
-      <h2>Write a review</h2>
+      <h1>Write a Review</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="landlordName">Landlord Name:</label>

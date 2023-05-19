@@ -1,69 +1,68 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  background-color: #efefef;
+  height: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  font-family: "Inter", sans-serif;
+  margin: 0; /* Reset the default margin */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.page-container {
+  margin-top: 80px; 
+  height: 100%;
+  width: 100%;
+}
+
+
+.user-info h1 {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.user-info h1:not(:last-child)::after {
+  content: "| ";
+}
+
+.navbar {
+  position: fixed; /* Make the navbar fixed */
+  top: 0; /* Stick it to the top */
+  left: 0; /* Stretch it to the left */
+  right: 0; /* Stretch it to the right */
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.signup {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  margin: 10px;
-  padding: 10px;
-}
-
-.title {
-  color: blue;
-  font-size: 70px;
-  font-family:'Courier New', Courier, monospace;
-}
-
-.moto {
-  display: flex;
-  justify-content: center;
   flex-direction: row;
   align-items: center;
-  color: gray;
-}
-.moto h2 {
-  margin: 40px;
+  background-color: green;
+  padding: 20px 10px;
+  z-index: 1; /* Add a higher z-index to ensure it appears above other content */
 }
 
+.btn-home {
+  color: #fff;
+  font-size: large;
+  text-decoration: none;
+  justify-self: flex-start;
+  margin-right: 15px;
+}
 
+.btn-home:hover {
+  cursor: pointer;
+}
+
+.brand {
+  margin: 0;
+  color: #fff;
+  font-size: xx-large;
+  font-weight: bold;
+  text-align: center;
+  flex-grow: 1; 
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  padding-left: 100px;
+}
 

@@ -1,0 +1,68 @@
+.homepage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden; /* Add this line to remove padding outside the image */
+  }
+  
+  .background-image {
+    background-image: url("../cal-poly-state-university-at-san-luis-obispo-student-housing-south-11.jpeg");
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Change width to vw */
+    height: 100vh; /* Change height to vh */
+  }
+  
+  .content h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: rgb(29, 169, 29);
+    text-shadow: 2px 2px 4px rgba(247, 245, 245, 0.4); /* Add a subtle text shadow */
+    font-family: "Arial", sans-serif; /* Apply a specific font family */
+    text-transform: uppercase; /* Convert the text to uppercase */
+  }
+  
+  
+  
+  .content {
+    text-align: center;
+    color: white;
+    position: absolute;
+    top: 40%; /* Adjust the top value to move the content up or down */
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  
+  .search-bar {
+    display: inline-block;
+  }
+  
+  .search-bar input {
+    width: 400px;
+    height: 50px;
+    padding: 10px;
+    font-size: 18px;
+  }
+  
+  .write-review-button {
+    position: absolute;
+    bottom: 70px;
+    right: 60px;
+    background-color: rgb(29, 174, 29);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border: none; /* Add this line to remove the button border */
+    box-shadow: 0 10px 14px rgba(0, 0, 0, 0.3); /* Add a subtle box shadow */
+    z-index: 1; /* Add this line to make sure the button is positioned above the background */
+  }
+  
+  
+  

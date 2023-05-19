@@ -5,7 +5,7 @@ import  "./ViewReviews.css"
 function Home() {
   
   return (
-    <div className="container">
+    <div className="view-review-container">
       {/* First Entry */}
       <div className="search-results">
         {/* Entry Box */}
