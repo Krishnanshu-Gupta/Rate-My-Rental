@@ -1,0 +1,76 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 60%;
+    margin-left: auto;
+  }
+  
+
+
+.search-results {
+  margin-bottom: 20px;
+}
+
+.entry-box {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.landlord-details {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.landlord-details p {
+  margin: 0 0 10px;
+}
+
+.rating-stars {
+  display: inline-block;
+}
+
+.rating-stars span {
+  font-size: 20px;
+  color: #FFD700;
+}
+
+.reviews {
+  flex: 1;
+}
+
+.review-wrapper {
+  margin-bottom: 20px;
+  margin-left: 3px;
+}
+
+.report-review {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.report-review p {
+  margin-bottom: 10px;
+}
+
+.report-button {
+  padding: 10px 20px;
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
