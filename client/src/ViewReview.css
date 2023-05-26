@@ -1,0 +1,136 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+}
+
+.view-reviews {
+	font-family: "Verdana";
+	display: flex;
+	font-size: 15px;
+	flex-direction: column;
+	justify-content: center;
+	margin: 5%;
+	margin-top: 0;
+}
+
+.review-box {
+	padding: 20px;
+	border-bottom: 1px solid #ccc;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+
+.review-stars-text {
+	font-weight: 600;
+}
+
+.review-main {
+	display: flex;
+	flex-direction: row;
+}
+
+.review-name {
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+}
+
+.review-categs {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	padding: 13px 0px 5px 25px;
+	column-gap: 20px;
+	row-gap: 10px;
+}
+
+.review-address {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.visit-button {
+	padding: 10px 20px;
+	background-color: white;
+	border: 1px solid #ccc;
+	color: black;
+	font-size: 13px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.entry-box {
+	background-color: #f0f0f0;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 40px;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+}
+
+.landlord-details {
+	flex: 1;
+	margin-right: 20px;
+}
+
+.landlord-details p {
+	margin: 0 0 10px;
+}
+
+.rating-stars {
+	display: inline-block;
+	padding: 10px 0px 10px 0px;
+}
+
+.rating-stars span {
+	font-size: 20px;
+	color: orange;
+}
+
+.filter-rating-stars {
+	display: inline-block;
+}
+
+.filter-rating-stars span {
+	font-size: 20px;
+	color: orange;
+}
+
+.filter-rating-stars:hover span {
+	color: yellow;
+}
+
+.rating-text {
+	font-size: 20px;
+	color: black;
+}
+
+.reviews {
+	flex: 1;
+}
+
+.review-wrapper {
+	margin-bottom: 20px;
+	margin-left: 3px;
+}
+
+.report-review {
+	margin-top: 20px;
+	text-align: right;
+}
+
+.report-review p {
+	margin-bottom: 10px;
+}
+
+.report-button {
+	padding: 10px 20px;
+	background-color: #000000;
+	color: white;
+	border: none;
+	border-radius: 20px;
+	cursor: pointer;
+}
