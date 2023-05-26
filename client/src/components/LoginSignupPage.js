@@ -53,13 +53,13 @@ const LoginSignupPage = ({ onClose }) => {
         </div>
         <form className="login-signup-form" onSubmit={handleSubmit}>
           <label className="login-signup-label">
-            Enter Email:
-            <input className="login-signup-input" type="email" value={email} onChange={handleEmailChange} />
+            Email:
+            <input className="login-signup-input" type="email" value={email} onChange={handleEmailChange} placeholder="Enter email" />
           </label>
           <br />
           <label className="login-signup-label">
-            Enter Password:
-            <input className="login-signup-input" type="password" value={password} onChange={handlePasswordChange} />
+            Password:
+            <input className="login-signup-input" type="password" value={password} onChange={handlePasswordChange} placeholder="Enter password" />
           </label>
           {activeTab === 'newaccount' && (
             <div className="password-validation">
