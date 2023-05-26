@@ -36,7 +36,7 @@ const LoginSignupPage = ({ onClose }) => {
   return (
     <div className="login-signup-popup">
       <div className="login-signup-container">
-        <h1 className="login-signup-title">Rate My Landlord</h1>
+        <h1 className="login-signup-title">RateMyRental</h1>
         <div className="login-signup-tabs">
           <button
             className={`login-signup-tab ${activeTab === 'signin' ? 'active' : ''}`}
