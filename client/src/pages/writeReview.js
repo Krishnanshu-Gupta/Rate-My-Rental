@@ -183,7 +183,7 @@ function WriteReview() {
               </ul>
             )}
           </div>
-        </div>
+        </div> 
       <div className="rating-section">
           <h3>Overall Rating</h3>
           <p>Give your overall rating of this location!</p>
