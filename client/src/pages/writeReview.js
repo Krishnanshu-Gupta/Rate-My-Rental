@@ -9,7 +9,9 @@ function WriteReview() {
     state: '',
     country: '',
     zipCode: '',
+    apartmentNumber: '', 
   });
+  
   const [overallRating, setOverallRating] = useState(0);
   const [healthAndSafetyRating, setHealthAndSafetyRating] = useState(0);
   const [repairsRating, setRepairsRating] = useState(0);
@@ -17,12 +19,21 @@ function WriteReview() {
   const [locationRating, setLocationRating] = useState(0);
   const [amenitiesRating, setAmenitiesRating] = useState(0);
   const [writtenReview, setWrittenReview] = useState("");
+  const [monthlyCostRange, setMonthlyCostRange] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false);
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormValues({ ...formValues, [name]: value });
   };
-
+  
+  const handleMonthlyCostRangeChange = (range) => {
+    setMonthlyCostRange(range);
+    setShowDropdown(false);
+  };
+  
+  
   const handleOverallRating = (rating) => {
     setOverallRating(rating);
   };
@@ -61,6 +72,7 @@ function WriteReview() {
     console.log("locationRating:", locationRating)
     console.log("amenitiesRating:", amenitiesRating)
     console.log("writtenReview:", writtenReview)
+    console.log("Monthly Pay:", monthlyCostRange)
     // submit to backend!
   };
 
@@ -87,6 +99,17 @@ function WriteReview() {
             name="streetName"
             className="form-control"
             value={formValues.streetName}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="apartmentNumber">Apartment Number:</label>
+          <input
+            type="text"
+            id="apartmentNumber"
+            name="apartmentNumber"
+            className="form-control"
+            value={formValues.apartmentNumber}
             onChange={handleInputChange}
           />
         </div>
@@ -142,6 +165,25 @@ function WriteReview() {
 
         <div>
       <h2>Review Your Stay</h2>
+      <div className="form-group">
+          <label htmlFor="monthlyCostRange">Monthly Cost Range:</label>
+          <div className="dropdown">
+            <button className="dropdown-button" onClick={() => setShowDropdown(!showDropdown)}>
+              {monthlyCostRange ? monthlyCostRange : 'Select a range'} <span>&#9662;</span>
+            </button>
+            {showDropdown && (
+              <ul className="dropdown-list">
+                <li onClick={() => handleMonthlyCostRangeChange('$0-499')}>$0-499</li>
+                <li onClick={() => handleMonthlyCostRangeChange('$500-999')}>$500-999</li>
+                <li onClick={() => handleMonthlyCostRangeChange('$1000-1499')}>$1000-1499</li>
+                <li onClick={() => handleMonthlyCostRangeChange('$1500-1999')}>$1500-1999</li>
+                <li onClick={() => handleMonthlyCostRangeChange('$2000-2499')}>$2000-2499</li>
+                <li onClick={() => handleMonthlyCostRangeChange('$2500-2999')}>$2500-2999</li>
+                <li onClick={() => handleMonthlyCostRangeChange('$3000 or more')}>$3000 or more</li>
+              </ul>
+            )}
+          </div>
+        </div>
       <div className="rating-section">
           <h3>Overall Rating</h3>
           <p>Give your overall rating of this location!</p>
