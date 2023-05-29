@@ -179,7 +179,7 @@ function WriteReview() {
                 <li onClick={() => handleMonthlyCostRangeChange('$1500-1999')}>$1500-1999</li>
                 <li onClick={() => handleMonthlyCostRangeChange('$2000-2499')}>$2000-2499</li>
                 <li onClick={() => handleMonthlyCostRangeChange('$2500-2999')}>$2500-2999</li>
-                <li onClick={() => handleMonthlyCostRangeChange('$3000 or more')}>$3000 or more</li>
+                <li onClick={() => handleMonthlyCostRangeChange('$3000 or more')}>$3000 or more</li> 
               </ul>
             )}
           </div>
