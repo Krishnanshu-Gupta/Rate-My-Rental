@@ -2,7 +2,7 @@
     "properties":
     [
         {
-            "address": "1144 Walnut St. San Luis Obispo CA 93401",
+            "address": "1144 Walnut St., San Luis Obispo, CA 93401",
             "coordinates": [-120.66206, 35.28683],
             "name": "John Doe",
             "num_revs": 14,
@@ -13,7 +13,7 @@
             "price-range": "1500 - 2000"
         },
         {
-            "address": "82 Rafael Way San Luis Obispo CA 93405",
+            "address": "82 Rafael Way, San Luis Obispo, CA 93405",
             "coordinates": [-120.67857, 35.291625],
             "name": "William Brown",
             "num_revs": 3,
@@ -34,6 +34,28 @@
                 3.2, 4.6, 4.3, 3, 2, 1
             ],
             "price-range": "2000 - 2500"
+        },
+        {
+            "address": "1144 Walnut St., San Luis Obispo, CA 93401",
+            "coordinates": [-120.66206, 35.29683],
+            "name": "John Doe",
+            "num_revs": 14,
+            "avg_ratings":
+            [
+                4.2, 3, 3.3, 4.9, 4.6, 2.1
+            ],
+            "price-range": "1500 - 2000"
+        },
+        {
+            "address": "1144 Walnut St., San Luis Obispo, CA 93401",
+            "coordinates": [-120.66206, 35.27683],
+            "name": "John Doe",
+            "num_revs": 14,
+            "avg_ratings":
+            [
+                4.2, 3, 3.3, 4.9, 4.6, 2.1
+            ],
+            "price-range": "1500 - 2000"
         }
     ]
 }

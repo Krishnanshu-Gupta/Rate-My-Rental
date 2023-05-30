@@ -4,21 +4,25 @@ body {
 }
 
 .view-reviews {
-	font-family: "Verdana";
+	font-family: Verdana;
 	display: flex;
 	font-size: 15px;
 	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 	margin: 5%;
-	margin-top: 0;
+	margin-top: 10px;
 }
+
+.view-reviews .item {
+	border-bottom: 1px solid #eee;
+	padding: 10px;
+	text-decoration: none;
+  }
 
 .review-box {
 	padding: 20px;
 	border-bottom: 1px solid #ccc;
-	position: relative;
-	display: flex;
-	flex-direction: column;
 }
 
 .review-stars-text {
@@ -47,6 +51,7 @@ body {
 .review-address {
 	display: flex;
 	flex-direction: row;
+	text-align: left;
 	align-items: center;
 	justify-content: space-between;
 }
@@ -59,6 +64,14 @@ body {
 	font-size: 13px;
 	border-radius: 5px;
 	cursor: pointer;
+}
+
+.price-range {
+	background: linear-gradient(to right, #ff9f1a, #ff1a1a);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-size: 20px;
+	font-weight: bold;
 }
 
 .entry-box {
@@ -134,3 +147,37 @@ body {
 	border-radius: 20px;
 	cursor: pointer;
 }
+
+
+
+
+  .mapboxgl-popup-close-button {
+	display: none;
+  }
+  .mapboxgl-popup-content {
+	font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', sans-serif;
+	padding: 0px !important;
+  }
+
+  .mapboxgl-popup-content h3 {
+	background: #91c949;
+	color: #fff;
+	width: 100%;
+	height: 50%;
+	border-radius: 3px 3px 0 0;
+	padding: 10px 0px;
+	margin: 0px;
+	font-weight: 700;
+  }
+
+  .mapboxgl-popup-content h4 {
+	margin: 0;
+	font-weight: 400;
+	padding: 10px 5px;
+  }
+
+  .mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
+	border-bottom-color: #91c949;
+  }
+
+

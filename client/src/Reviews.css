@@ -1,4 +1,4 @@
-.App {
+.Reviews {
 	text-align: center;
 	align-items: flex-start;
 	flex-direction: column;
@@ -117,10 +117,14 @@
 
 .left {
 	width: 60%;
+	overflow: hidden;
 }
 
 .right {
 	width: 40%;
+	align-items: center;
+	justify-content: center;
+	overflow-y: auto;
 }
 
 @media screen and (max-width: 600px) {

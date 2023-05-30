@@ -14,11 +14,17 @@ import Typography from '@mui/material/Typography';
 import TuneIcon from '@mui/icons-material/Tune';
 
 import data from './example.json';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStarHalfStroke as starHalf, faStar as starFull, faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faStar as starEmpt} from '@fortawesome/free-regular-svg-icons';
 
-function App() {
+
+
+function Review() {
 	const markerRef = useRef([-120.6596, 35.2828]);
 	const [markerPosition, setMarkerPosition] = useState(markerRef.current);
 	const [address, setAddress] = useState("");
+	const [selected, setSelected] = useState(-1);
 
 	const convertAddressToCoordinates = async (address) => {
 		const MAPBOX_API_KEY = 'pk.eyJ1Ijoia3Jpc2huYW5zaHUiLCJhIjoiY2xoang2a29nMG04MjNpbXQ3MmRoNWw3ZyJ9.i4zaDfrRa3VIWW3FAuAFtw'; // Replace with your Mapbox API key
@@ -31,23 +37,23 @@ function App() {
 		  );
 
 		  if (response.status === 200 && response.data.features.length > 0) {
-			const center = response.data.features[0].center;
-			//console.log(response)
-			const longitude = center[0];
-			const latitude = center[1];
+				const center = response.data.features[0].center;
+				//console.log(response)
+				const longitude = center[0];
+				const latitude = center[1];
 
-			// Use the coordinates for further processing
-			//console.log('Coordinates:', longitude, latitude);
-			return [longitude, latitude];
+				// Use the coordinates for further processing
+				//console.log('Coordinates:', longitude, latitude);
+				return [longitude, latitude];
 		  } else {
-			//console.log('No coordinates found for the given address.');
-			return [];
+				//console.log('No coordinates found for the given address.');
+				return [];
 		  }
 		} catch (error) {
 		  //console.error('Error converting address to coordinates:', error);
 		  return [];
 		}
-	  };
+	};
 
 	useEffect(() => {
 		mapboxgl.accessToken = "pk.eyJ1Ijoia3Jpc2huYW5zaHUiLCJhIjoiY2xoang2a29nMG04MjNpbXQ3MmRoNWw3ZyJ9.i4zaDfrRa3VIWW3FAuAFtw";
@@ -60,20 +66,20 @@ function App() {
 
 		const geocoder = new MapboxGeocoder({
 			accessToken: mapboxgl.accessToken,
-			mapboxgl: mapboxgl
+			mapboxgl: mapboxgl,
+			language: 'en',
+			bbox: [-121.438176, 34.897475, -119.472489, 35.796655]
+			//proximity: "-120.6596, 35.2828",
 		});
 
 		var marker = new mapboxgl.Marker({ color: 'red', draggable: true })
 			.setLngLat(new mapboxgl.LngLat(markerRef.current[0], markerRef.current[1]))
-			.addTo(map);
 
 		function onDragEnd() {
 			const lngLat = marker.getLngLat();
 			markerRef.current = [lngLat.lng, lngLat.lat];
 			setMarkerPosition(markerRef.current);
 		}
-
-		marker.on('dragend', onDragEnd);
 
 		map.addControl(new mapboxgl.NavigationControl());
 		map.addControl(geocoder, 'top-left');
@@ -87,7 +93,6 @@ function App() {
 			marker = new mapboxgl.Marker({ color: 'red', draggable: true })
 				.setLngLat([markerRef.current[0], markerRef.current[1]])
 				.addTo(map);
-			marker.on('dragend', onDragEnd);
 		})
 
 		map.on('load', () => {
@@ -98,26 +103,27 @@ function App() {
 					map.addImage('custom-marker', image);
 				}
 			);
-			const features = []
-			data.properties.forEach(property => {
+			const properties = []
+			data.properties.forEach((property, i) => {
 				const marker = {
 					type: 'Feature',
 					properties: {
-						description: `<strong>${property.name}</strong><p>${property.address}</p>`,
+						description: `<h3>${property.name}</h3><h4>${property.address}</h4>`,
+						id: i
 					},
 					geometry: {
 						type: 'Point',
 						coordinates: property.coordinates,
 					},
 				};
-				features.push(marker)
+				properties.push(marker)
 			});
 
 			map.addSource('places', {
 				'type': 'geojson',
 				'data': {
 					'type': 'FeatureCollection',
-					'features': features
+					'features': properties
 				}
 			});
 			// Add a layer showing the places.
@@ -133,29 +139,17 @@ function App() {
 				}
 			});
 
-			/*
-			map.addLayer({
-				'id': 'places',
-				'type': 'symbol',
-				'source': 'places',
-				'layout': {
-					'icon-image': 'custom-marker',
-					'icon-size': 0.70,
-					'text-field': ['get', 'title'],
-					'text-font': [
-						'Open Sans Semibold',
-						'Arial Unicode MS Bold'
-					],
-					'text-offset': [0, 1.25],
-					'text-anchor': 'top'
-				}
-			}); */
-
 			// Create a popup, but don't add it to the map yet.
 			const popup = new mapboxgl.Popup({
 				closeButton: false,
 				closeOnClick: false
 			});
+
+			map.on('click', 'places', (e) => {
+				const description = e.features[0].properties.description;
+				setSelected(e.features[0].properties.id)
+				scrollToSelectedReviewBox(e.features[0].properties.id)
+			})
 
 			map.on('mouseenter', 'places', (e) => {
 				map.getCanvas().style.cursor = 'pointer';
@@ -168,20 +162,26 @@ function App() {
 			map.on('mouseleave', 'places', () => {
 				map.getCanvas().style.cursor = '';
 				popup.remove();
+				setSelected(-1);
 			});
 		});
 	}, []);
 
+	function scrollToSelectedReviewBox(selected) {
+		const selectedReviewBox = document.getElementById(`review-box-${selected}`);
+		if (selectedReviewBox) {
+		  selectedReviewBox.scrollIntoView({ behavior: "smooth" });
+		}
+	}
+
 	return (
-		<div className="App">
-			<div style={{height: '84px', width: '100%',  backgroundColor: 'green'}}>
-				<div style={{color: 'green'}}></div>
-			</div>
+		<div className="Reviews">
 			<div className="review-container">
 				<div className="column left">
 					<div className="map" id="map" />
 				</div>
-				<div className="column right" style = {{overflowY: "auto"}}>
+				<div className="column right">
+					<>{/*
 					<div className='filters'>
 						<Accordion>
 							<AccordionSummary
@@ -234,74 +234,103 @@ function App() {
 							</AccordionDetails>
 						</Accordion>
 					</div>
+					*/}</>
 					<div className="view-reviews">
-						{data.properties.map((property) => (
-							<div className="review-box">
-								<div className="review-main">
-									<div className="review-name">
-										<div style = {{fontWeight: '600', fontSize: "18px"}}>{property.name}</div>
-										<div style = {{paddingTop: "3px"}}>Total Reviews: {property.num_revs}</div>
+						{data.properties.map((property, i) => (
+							<div style = {{display: "flex", flexDirection: "row"}}>
+								<div id={`review-box-${i}`} className="review-box" style={{ border: selected === i ? "3px solid #91c949" : "",}}>
+									<div className="review-main">
+										<div className="review-name">
+											<div style = {{fontWeight: '600', fontSize: "18px"}}>{property.name}</div>
+											<div style = {{paddingTop: "3px"}}>Total Reviews: {property.num_revs}</div>
+
+											<div className = "price-range" style = {{paddingTop: "40px"}}>${property["price-range"]}</div>
+										</div>
+										<div className="review-categs">
+											<span className="rating-stars">
+												<div className="review-stars-text">Overall</div>
+												<div style = {{paddingTop: "5px"}}>
+													{[
+														...Array(Math.floor(property.avg_ratings[0])).fill(<FontAwesomeIcon icon={starFull} color = "orange"/>),
+														...Array(Math.ceil(property.avg_ratings[0] - Math.floor(property.avg_ratings[0]))).fill(<FontAwesomeIcon icon={starHalf} color = "orange"/>),
+														...Array(5 - (
+															Math.floor(property.avg_ratings[0]) +
+															Math.ceil(property.avg_ratings[0] - Math.floor(property.avg_ratings[0]))
+														)).fill(<FontAwesomeIcon icon={starEmpt} color = "orange"/>)
+													]}
+												</div>
+											</span>
+											<span className="rating-stars">
+												<div className="review-stars-text">Safety</div>
+												<div style = {{paddingTop: "5px"}}>
+													{[
+														...Array(Math.floor(property.avg_ratings[1])).fill(<FontAwesomeIcon icon={starFull} color = "orange"/>),
+														...Array(Math.ceil(property.avg_ratings[1] - Math.floor(property.avg_ratings[1]))).fill(<FontAwesomeIcon icon={starHalf} color = "orange"/>),
+														...Array(5 - (
+															Math.floor(property.avg_ratings[1]) +
+															Math.ceil(property.avg_ratings[1] - Math.floor(property.avg_ratings[1]))
+														)).fill(<FontAwesomeIcon icon={starEmpt} color = "orange"/>)
+													]}
+												</div>
+											</span>
+											<span className="rating-stars">
+												<div className="review-stars-text">Repairs</div>
+												<div style = {{paddingTop: "5px"}}>
+													{[
+														...Array(Math.floor(property.avg_ratings[2])).fill(<FontAwesomeIcon icon={starFull} color = "orange"/>),
+														...Array(Math.ceil(property.avg_ratings[2] - Math.floor(property.avg_ratings[2]))).fill(<FontAwesomeIcon icon={starHalf} color = "orange"/>),
+														...Array(5 - (
+															Math.floor(property.avg_ratings[2]) +
+															Math.ceil(property.avg_ratings[2] - Math.floor(property.avg_ratings[2]))
+														)).fill(<FontAwesomeIcon icon={starEmpt} color = "orange"/>)
+													]}
+												</div>
+											</span>
+											<span className="rating-stars">
+												<div className="review-stars-text">Respect</div>
+												<div style = {{paddingTop: "5px"}}>
+													{[
+														...Array(Math.floor(property.avg_ratings[3])).fill(<FontAwesomeIcon icon={starFull} color = "orange"/>),
+														...Array(Math.ceil(property.avg_ratings[3] - Math.floor(property.avg_ratings[3]))).fill(<FontAwesomeIcon icon={starHalf} color = "orange"/>),
+														...Array(5 - (
+															Math.floor(property.avg_ratings[3]) +
+															Math.ceil(property.avg_ratings[3] - Math.floor(property.avg_ratings[3]))
+														)).fill(<FontAwesomeIcon icon={starEmpt} color = "orange"/>)
+													]}
+												</div>
+											</span>
+											<span className="rating-stars">
+												<div className="review-stars-text">Location</div>
+												<div style = {{paddingTop: "5px"}}>
+													{[
+														...Array(Math.floor(property.avg_ratings[4])).fill(<FontAwesomeIcon icon={starFull} color = "orange"/>),
+														...Array(Math.ceil(property.avg_ratings[4] - Math.floor(property.avg_ratings[4]))).fill(<FontAwesomeIcon icon={starHalf} color = "orange"/>),
+														...Array(5 - (
+															Math.floor(property.avg_ratings[4]) +
+															Math.ceil(property.avg_ratings[4] - Math.floor(property.avg_ratings[4]))
+														)).fill(<FontAwesomeIcon icon={starEmpt} color = "orange"/>)
+													]}
+												</div>
+											</span>
+											<span className="rating-stars">
+												<div className="review-stars-text">Amenities</div>
+												<div style = {{paddingTop: "5px"}}>
+													{[
+														...Array(Math.floor(property.avg_ratings[5])).fill(<FontAwesomeIcon icon={starFull} color = "orange"/>),
+														...Array(Math.ceil(property.avg_ratings[5] - Math.floor(property.avg_ratings[5]))).fill(<FontAwesomeIcon icon={starHalf} color = "orange"/>),
+														...Array(5 - (
+															Math.floor(property.avg_ratings[5]) +
+															Math.ceil(property.avg_ratings[5] - Math.floor(property.avg_ratings[5]))
+														)).fill(<FontAwesomeIcon icon={starEmpt} color = "orange"/>)
+													]}
+												</div>
+											</span>
+										</div>
 									</div>
-									<div className="review-categs">
-										<span className="rating-stars">
-											<div className="review-stars-text">Overall</div>
-											<div>
-												{[
-													...Array(Math.floor(property.avg_ratings[0])).fill(<span>&#9733;</span>),
-													...Array(5 - Math.floor(property.avg_ratings[0])).fill(<span>&#9734;</span>)
-												]}
-											</div>
-										</span>
-										<span className="rating-stars">
-											<div className="review-stars-text">Safety</div>
-											<div>
-												{[
-													...Array(Math.floor(property.avg_ratings[1])).fill(<span>&#9733;</span>),
-													...Array(5 - Math.floor(property.avg_ratings[1])).fill(<span>&#9734;</span>)
-												]}
-											</div>
-										</span>
-										<span className="rating-stars">
-											<div className="review-stars-text">Repairs</div>
-											<div>
-												{[
-													...Array(Math.floor(property.avg_ratings[2])).fill(<span>&#9733;</span>),
-													...Array(5 - Math.floor(property.avg_ratings[2])).fill(<span>&#9734;</span>)
-												]}
-											</div>
-										</span>
-										<span className="rating-stars">
-											<div className="review-stars-text">Respect</div>
-											<div>
-												{[
-													...Array(Math.floor(property.avg_ratings[3])).fill(<span>&#9733;</span>),
-													...Array(5 - Math.floor(property.avg_ratings[3])).fill(<span>&#9734;</span>)
-												]}
-											</div>
-										</span>
-										<span className="rating-stars">
-											<div className="review-stars-text">Location</div>
-											<div>
-												{[
-													...Array(Math.floor(property.avg_ratings[4])).fill(<span>&#9733;</span>),
-													...Array(5 - Math.floor(property.avg_ratings[4])).fill(<span>&#9734;</span>)
-												]}
-											</div>
-										</span>
-										<span className="rating-stars">
-											<div className="review-stars-text">Amenities</div>
-											<div>
-												{[
-													...Array(Math.floor(property.avg_ratings[5])).fill(<span>&#9733;</span>),
-													...Array(5 - Math.floor(property.avg_ratings[5])).fill(<span>&#9734;</span>)
-												]}
-											</div>
-										</span>
+									<div className="review-address">
+										<div >{property.address}</div>
+										<button style = {{alignItems: "flex-end", marginLeft: "5px"}} className="visit-button">View Reviews</button>
 									</div>
-								</div>
-								<div className="review-address">
-									<div >{property.address}</div>
-									<button style = {{alignItems: "right"}} className="visit-button">View Reviews</button>
 								</div>
 							</div>
 						))}
@@ -312,4 +341,4 @@ function App() {
 	);
 }
 
-export default App;
+export default Review;
