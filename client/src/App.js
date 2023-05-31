@@ -43,7 +43,7 @@ const handleSignInClick = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/write-review" element={<WriteReview />} />
           <Route path="/view-reviews" element={<ViewReviews />} /> 
-          <Route path="/all-reviews" element={<AllReviews />} /> 
+          <Route path="/all-reviews" element={<AllReviews property_id="64753dfa59ddea2af496a4ba" />} /> 
         </Routes>
         {isPopupVisible && <LoginSignupPage onClose={handleClosePopup} />}
 
