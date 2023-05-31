@@ -1,194 +1,69 @@
-import React from "react";
-import  "./ViewReviews.css"
+import React from 'react';
+import './ViewReviews.css';
+import { properties } from '../components/propertiesData';
+
+function ViewReviews({ property_id }) {
+  const filteredProperties = properties.filter(
+    (property) => property.propertyId.$oid === property_id
+  );
+
+  const renderStarRating = (rating) => {
+    const fullStars = '★'.repeat(rating);
+    const emptyStars = '☆'.repeat(5 - rating);
+    return (
+      <span className="star-rating">
+        <span className="full-stars">{fullStars}</span>
+        <span className="empty-stars">{emptyStars}</span>
+      </span>
+    );
+  };
 
 
-function Home() {
-  
   return (
-    <div className="view-review-container">
-      {/* First Entry */}
-      <div className="search-results">
-        {/* Entry Box */}
-        <div className="entry-box">
-          {/* Landlord Details */}
-          <div className="landlord-details">
-            <p>
-              <strong>Landlord Name:</strong> John Doe
-            </p>
-            <p>
-              <strong>Address:</strong> 123 Main St
-            </p>
-            <p>
-              <strong>Overall Rating:</strong>{" "}
-              <span className="rating-stars">
-                <span>&#9733;</span>
-                <span>&#9733;</span>
-                <span>&#9733;</span>
-                <span>&#9733;</span>
-                <span>&#9733;</span>
-              </span>
-            </p>
-          </div>
-
-          {/* Ratings */}
-          <div className="ratings">
-            {/* Rating Wrapper */}
-            <div className="rating-wrapper">
-              <p>
-                <strong>Health & Safety:</strong>{" "}
-                <span className="rating-stars">
-                  <span>&#9733;</span>
-                  <span>&#9733;</span>
-                  <span>&#9733;</span>
-                  <span>&#9733;</span>
-                  <span>&#9733;</span>
-                </span>
-              </p>
-            </div>
-
-            {/* Rating Wrapper */}
-            <div className="rating-wrapper">
-              <p>
-                <strong>Respect:</strong>{" "}
-                <span className="rating-stars">
-                  <span>&#9733;</span>
-                  <span>&#9733;</span>
-                  <span>&#9733;</span>
-                  <span>&#9733;</span>
-                  <span>&#9734;</span>
-                </span>
-              </p>
-            </div>
-
-            {/* Rating Wrapper */}
-            <div className="rating-wrapper">
-              <p>
-                <strong>Repair:</strong>{" "}
-                <span className="rating-stars">
-                  <span>&#9733;</span>
-                  <span>&#9733;</span>
-                  <span>&#9733;</span>
-                  <span>&#9733;</span>
-                  <span>&#9734;</span>
-                </span>
-              </p>
-            </div>
-          </div>
-
-          {/* Reviews */}
-          <div className="reviews">
-            {/* Review Wrapper */}
-            <div className="review-wrapper">
-              <div className="review">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse scelerisque, leo sed consectetur ullamcorper.
-                </p>
+    // <p>Hiiiii</p>
+    <div className="property-container">
+      {filteredProperties.map((property) => (
+        <div className="property-box" key={property._id.$oid}>
+          <div className="property-info">
+            <div className="left-half">
+              <div className="ratings-section">
+                <div className="rating">
+                  <p className="overall-rating">Overall Rating:</p>
+                  <p>{renderStarRating(property.overallRating)}</p>
+                </div>
+                <div className="rating">
+                  <p>Health and Safety:</p>
+                  <p>{renderStarRating(property.healthAndSafetyRating)}</p>
+                </div>
+                <div className="rating">
+                  <p>Repairs Rating:</p>
+                  <p>{renderStarRating(property.repairsRating)}</p>
+                </div>
               </div>
             </div>
-            {/* Repeat the review-wrapper for each review */}
-          </div>
-        </div>
-      </div>
-
-      {/* Report Review */}
-      <div className="report-review">
-        <p>Have an issue with this review?</p>
-        <button className="report-button">Report this review</button>
-      </div>
-
-      {/* Second Entry */}
-      <div className="search-results">
-        {/* Entry Box */}
-        <div className="entry-box">
-          {/* Landlord Details */}
-          <div className="landlord-details">
-            <p>
-              <strong>Landlord Name:</strong> Jane Smith
-            </p>
-            <p>
-              <strong>Address:</strong> 456 Elm St
-            </p>
-            <p>
-              <strong>Overall Rating:</strong>{" "}
-              <span className="rating-stars">
-                <span>&#9733;</span>
-                <span>&#9733;</span>
-                <span>&#9733;</span>
-                <span>&#9733;</span>
-                <span>&#9734;</span>
-              </span>
-            </p>
-          </div>
-
-          {/* Ratings */}
-          <div className="ratings">
-            {/* Rating Wrapper */}
-            <div className="rating-wrapper">
-              <p>
-                <strong>Health & Safety:</strong>{" "}
-                <span className="rating-stars">
-                  <span>&#9733;</span>
-                  <span>&#9733;</span>
-                  <span>&#9733;</span>
-                  <span>&#9733;</span>
-                  <span>&#9734;</span>
-                </span>
-              </p>
-            </div>
-
-            {/* Rating Wrapper */}
-            <div className="rating-wrapper">
-              <p>
-                <strong>Respect:</strong>{" "}
-                <span className="rating-stars">
-                  <span>&#9733;</span>
-                  <span>&#9733;</span>
-                  <span>&#9733;</span>
-                  <span>&#9733;</span>
-                  <span>&#9733;</span>
-                </span>
-              </p>
-            </div>
-
-            {/* Rating Wrapper */}
-            <div className="rating-wrapper">
-              <p>
-                <strong>Repair:</strong>{" "}
-                <span className="rating-stars">
-                  <span>&#9733;</span>
-                  <span>&#9733;</span>
-                  <span>&#9733;</span>
-                  <span>&#9733;</span>
-                  <span>&#9734;</span>
-                </span>
-              </p>
-            </div>
-          </div>
-
-          {/* Reviews */}
-          <div className="reviews">
-            {/* Review Wrapper */}
-            <div className="review-wrapper">
-              <div className="review">
-                <p>
-                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                  accusantium doloremque laudantium, totam rem aperiam.
-                </p>
+            <div className="right-half">
+              <div className="rating">
+                <p>Respect Rating:</p>
+                <p>{renderStarRating(property.respectRating)}</p>
+              </div>
+              <div className="rating">
+                <p>Location Rating:</p>
+                <p>{renderStarRating(property.locationRating)}</p>
+              </div>
+              <div className="rating">
+                <p>Amenities Rating:</p>
+                <p>{renderStarRating(property.amenitiesRating)}</p>
               </div>
             </div>
-            {/* Repeat the review-wrapper for each review */}
+          </div>
+          <div className="written-review">
+            <h3>Written Review</h3>
+            <p>{property.writtenReview}</p>
           </div>
         </div>
-      </div>
-
-      {/* Report Review */}
-      <div className="report-review">
-        <p>Have an issue with this review?</p>
-        <button className="report-button">Report this review</button>
-      </div>
+      ))}
     </div>
   );
 }
 
-export default Home;
+export default ViewReviews;

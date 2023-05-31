@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./writeReview.css"
+import Axios from "axios";
+import { create } from 'domain';
+import { Link, useNavigate } from "react-router-dom";
 
 function WriteReview() {
-  const [formValues, setFormValues] = useState({
-    landlordName: '',
-    streetName: '',
-    city: '',
-    state: '',
-    country: '',
-    zipCode: '',
-    apartmentNumber: '', 
-  });
-  
+  const navigate = useNavigate();
+  const [listOfReviews, setListOfReviews] = useState([]);
+  const [listOfProperties, setListOfProperties] = useState([]);
+
+  const [landlordName, setLandlordName] = useState("");
+  const [streetName, setStreetName] = useState("");
+  const [apartmentNumber, setApartmentNumber] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [country, setCountry] = useState("");
+  const [zipCode, setZipCode] = useState("");
+
+  const [linkProof, setLinkProof] = useState("");
   const [overallRating, setOverallRating] = useState(0);
   const [healthAndSafetyRating, setHealthAndSafetyRating] = useState(0);
   const [repairsRating, setRepairsRating] = useState(0);
@@ -19,14 +25,10 @@ function WriteReview() {
   const [locationRating, setLocationRating] = useState(0);
   const [amenitiesRating, setAmenitiesRating] = useState(0);
   const [writtenReview, setWrittenReview] = useState("");
+
   const [monthlyCostRange, setMonthlyCostRange] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
 
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
   
   const handleMonthlyCostRangeChange = (range) => {
     setMonthlyCostRange(range);
@@ -61,25 +63,212 @@ function WriteReview() {
     setWrittenReview(event.target.value);
   };  
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("In Handle Submit");
-    console.log("Form Values:", formValues);
-    console.log("OveralRating:", overallRating)
-    console.log("Health&Safety:", healthAndSafetyRating)
-    console.log("repairsRating:", repairsRating)
-    console.log("respectRating:", respectRating)
-    console.log("locationRating:", locationRating)
-    console.log("amenitiesRating:", amenitiesRating)
-    console.log("writtenReview:", writtenReview)
-    console.log("Monthly Pay:", monthlyCostRange)
-    // submit to backend!
+  useEffect(() => {
+    Axios.get("http://localhost:3001/getReviews").then((response) => {
+      setListOfReviews(response.data);
+    });
+    Axios.get("http://localhost:3001/getProperties").then((response) => {
+      setListOfProperties(response.data);
+    });   
+  }, []);
+  
+  const convertAddressToCoordinates = async (address) => {
+    const MAPBOX_API_KEY = 'pk.eyJ1Ijoia3Jpc2huYW5zaHUiLCJhIjoiY2xoang2a29nMG04MjNpbXQ3MmRoNWw3ZyJ9.i4zaDfrRa3VIWW3FAuAFtw'; // Replace with your Mapbox API key
+
+        try {
+          const response = await Axios.get(
+            `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
+              address
+            )}.json?access_token=${MAPBOX_API_KEY}`
+          );
+
+          if (response.status === 200 && response.data.features.length > 0) {
+            const center = response.data.features[0].center;
+            //console.log(response)
+            const longitude = center[0];
+            const latitude = center[1];
+
+            // Use the coordinates for further processing
+            console.log('Coordinates:', longitude, latitude);
+            return [longitude, latitude];
+          } else {
+            console.log('No coordinates found for the given address.');
+            return [];
+          }
+        } catch (error) {
+          //console.error('Error converting address to coordinates:', error);
+          return [];
+        }
+      };
+  
+  const updateProperty = (propertyId, updatedData) => {
+    Axios.put(`http://localhost:3001/updateProperty/${propertyId}`, updatedData)
+    .then((response) => {
+      // Handle the response if needed
+      // console.log("Property updated successfully");
+      // const updatedProperty = response.data;
+      // setListOfProperties((prevList) => {
+      //   const updatedList = prevList.map((property) => {
+      //     if (property._id === updatedProperty._id) {
+      //       return updatedProperty;
+      //     }
+      //     return property;
+      //   });
+      //   return updatedList;
+      // });
+      createReview(propertyId).then(() => {
+        return propertyId;
+      }).catch((error) => {
+        console.log(error);
+      });
+    })
+    .catch((error) => {
+      // Handle errors if any
+      console.error("Error updating property", error);
+    });
+  }
+  const createProperty = async () => {
+    console.log(listOfProperties);
+
+    //Check to see whether property is already in DB
+    const street = listOfProperties.filter((obj) => {
+      return (
+        obj.streetName.toLowerCase().includes(streetName.toLowerCase())
+      );
+    });
+    console.log(street);
+
+    if(street.length > 0){
+      console.log("PROPERTY FOUND!!!!");
+      console.log("in Property, id is: " + street[0]._id);
+
+      var fullAddress = street[0].streetName + " " + street[0].city + " " + street[0].state + " " + street[0].zipCode;
+      convertAddressToCoordinates(fullAddress);
+
+      var currRevs = street[0].num_revs + 1;
+      var updatedRats = [overallRating, healthAndSafetyRating, repairsRating, respectRating, locationRating, amenitiesRating];
+
+      for(let i = 0; i < street[0].avg_ratings.length; i++) {
+        const val = street[0].avg_ratings[i];
+        const new_rat = (((currRevs - 1) * val) + updatedRats[i]) / currRevs;
+        updatedRats[i] = new_rat;
+      }
+      console.log("num revs currently " + currRevs);
+
+      const updatedData = {
+        num_revs: currRevs,
+        avg_ratings: updatedRats,
+      }
+
+      updateProperty(street[0]._id, updatedData).then(() => {
+        // createReview(street[0]._id).then(() => {
+        //   return street[0]._id;
+        // }).catch((error) => {
+        //   console.log(error);
+        // });
+
+        
+      });
+
+      
+    }
+    else{
+      const fullAddress = streetName + ", " + city + ", " + state + " " + zipCode;
+      const coords = await convertAddressToCoordinates(fullAddress);
+      const lat = coords[0];
+      const long = coords[1];
+      const num_revs = 1;
+      const avg_ratings = [overallRating, healthAndSafetyRating, repairsRating, respectRating, locationRating, amenitiesRating];
+      console.log("monthly cost range: " + monthlyCostRange);
+      console.log("full addy is " + fullAddress);
+      console.log("coord is " + coords);
+      Axios.post("http://localhost:3001/createProperty", {
+        fullAddress,
+        num_revs,
+        avg_ratings,
+        landlordName,
+        streetName,
+        apartmentNumber,
+        city,
+        state,
+        country,
+        zipCode,
+        monthlyCostRange,
+        lat,
+        long
+      }).then((response) => {
+        setListOfProperties([
+          ...listOfProperties,
+          {
+            fullAddress,
+            num_revs,
+            avg_ratings, 
+            landlordName,
+            streetName,
+            apartmentNumber,
+            city,
+            state,
+            country,
+            zipCode,
+            monthlyCostRange,
+            lat,
+            long
+          },
+        ]);
+
+
+        console.log("Hi this is in create Property, " + response.data._id);
+        console.log(listOfProperties);
+
+        createReview(response.data._id).then(() => {
+          return response.data._id;
+        });
+        
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
+    
   };
+
+  const createReview = (propertyId) => {
+    console.log("This is the property id given, " + propertyId);
+    Axios.post("http://localhost:3001/createReview", {
+      overallRating,
+      healthAndSafetyRating,
+      repairsRating,
+      respectRating,
+      locationRating,
+      amenitiesRating,
+      writtenReview,
+      linkProof,
+      propertyId,
+    }).then((response) => {
+      
+      setListOfReviews([
+        ...listOfReviews,
+        {
+          overallRating,
+          healthAndSafetyRating,
+          repairsRating,
+          respectRating,
+          locationRating,
+          amenitiesRating,
+          writtenReview,
+          linkProof,
+          propertyId,
+        },
+      ]);
+      navigate("/");
+      return response.insertedId;
+    });
+    
+  };
+
 
   return (
     <div className="container">
       <h1>Write a Review</h1>
-      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="landlordName">Landlord Name:</label>
           <input
@@ -87,8 +276,10 @@ function WriteReview() {
             id="landlordName"
             name="landlordName"
             className="form-control"
-            value={formValues.landlordName}
-            onChange={handleInputChange}
+            value={landlordName}
+            onChange={(event) => {
+              setLandlordName(event.target.value);
+            }}
           />
         </div>
         <div className="form-group">
@@ -98,8 +289,10 @@ function WriteReview() {
             id="streetName"
             name="streetName"
             className="form-control"
-            value={formValues.streetName}
-            onChange={handleInputChange}
+            value={streetName}
+            onChange={(event) => {
+              setStreetName(event.target.value);
+            }}
           />
         </div>
         <div className="form-group">
@@ -109,8 +302,10 @@ function WriteReview() {
             id="apartmentNumber"
             name="apartmentNumber"
             className="form-control"
-            value={formValues.apartmentNumber}
-            onChange={handleInputChange}
+            value={apartmentNumber}
+            onChange={(event) => {
+              setApartmentNumber(event.target.value);
+            }}
           />
         </div>
         <div className="form-group">
@@ -120,8 +315,10 @@ function WriteReview() {
             id="city"
             name="city"
             className="form-control"
-            value={formValues.city}
-            onChange={handleInputChange}
+            value={city}
+            onChange={(event) => {
+              setCity(event.target.value);
+            }}
           />
         </div>
         <div className="form-group">
@@ -131,8 +328,10 @@ function WriteReview() {
             id="state"
             name="state"
             className="form-control"
-            value={formValues.state}
-            onChange={handleInputChange}
+            value={state}
+            onChange={(event) => {
+              setState(event.target.value);
+            }}
           />
         </div>
         <div className="form-group">
@@ -142,8 +341,10 @@ function WriteReview() {
             id="country"
             name="country"
             className="form-control"
-            value={formValues.country}
-            onChange={handleInputChange}
+            value={country}
+            onChange={(event) => {
+              setCountry(event.target.value);
+            }}
           />
         </div>
         <div className="form-group">
@@ -153,14 +354,25 @@ function WriteReview() {
             id="zipCode"
             name="zipCode"
             className="form-control"
-            value={formValues.zipCode}
-            onChange={handleInputChange}
+            value={zipCode}
+            onChange={(event) => {
+              setZipCode(event.target.value);
+            }}
           />
         </div>
         <div className="document-upload">
           <h3>Prove your stay</h3>
-          <p>Please submit a document that proves your stay as a tenant:</p>
-          <button className="btn btn-primary">Upload File</button>
+          <p>Please submit a link to a document that proves your stay as a tenant:</p>
+          <input
+            type="text"
+            id="linkProof"
+            name="linkProof"
+            className="form-control"
+            value={linkProof}
+            onChange={(event) => {
+              setLinkProof(event.target.value);
+            }}
+          />
         </div>
 
         <div>
@@ -302,12 +514,12 @@ function WriteReview() {
             onChange={handleWrittenReviewChange}
           />
         </div>
-        <button className="submit-button" type="submit">
+        <button className="submit-button" onClick={createProperty} >
           Submit Review
         </button>
     </div>
 
-      </form>
+      
 
     </div>
   );
