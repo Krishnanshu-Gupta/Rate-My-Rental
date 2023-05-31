@@ -5,9 +5,7 @@ import LoginSignupPage from "./components/LoginSignupPage";
 import ViewReviews from "./pages/ViewReviews";
 import WriteReview from "./pages/writeReview";
 import Home from "./pages/Home";
-
-
-
+import AllReviews from "./pages/AllReviews";
 
 
 function App() {
@@ -45,6 +43,7 @@ const handleSignInClick = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/write-review" element={<WriteReview />} />
           <Route path="/view-reviews" element={<ViewReviews />} /> 
+          <Route path="/all-reviews" element={<AllReviews />} /> 
         </Routes>
         {isPopupVisible && <LoginSignupPage onClose={handleClosePopup} />}
 
