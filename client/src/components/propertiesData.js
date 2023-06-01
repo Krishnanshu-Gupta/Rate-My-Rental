@@ -27,7 +27,7 @@ export const properties = [
       "amenitiesRating": 3,
       "writtenReview": "123 Main Street",
       "propertyId": {
-        "$oid": "60b3d5f22b365d5c36f2b102"
+        "$oid": "6477979c6f4b7321de81f4d3"
       },
       "__v": 0
     },
@@ -59,7 +59,7 @@ export const properties = [
       "amenitiesRating": 4,
       "writtenReview": "789 Oak Street",
       "propertyId": {
-        "$oid": "60b3d5f22b365d5c36f2b104"
+        "$oid": "6477bb2252c102195c81b1b9"
       },
       "__v": 0
     },
@@ -75,7 +75,7 @@ export const properties = [
       "amenitiesRating": 4,
       "writtenReview": "987 Maple Lane",
       "propertyId": {
-        "$oid": "64753dfa59ddea2af496a4ba"
+        "$oid": "6477979c6f4b7321de81f4d3"
       },
       "__v": 0
     },
@@ -123,7 +123,7 @@ export const properties = [
       "amenitiesRating": 2,
       "writtenReview": "555 Walnut Avenue",
       "propertyId": {
-        "$oid": "60b3d5f22b365d5c36f2b108"
+        "$oid": "6478059b6312c402f2bd3ce3"
       },
       "__v": 0
     },
@@ -227,15 +227,15 @@ export const properties = [
       "_id": {
         "$oid": "64753e7859ddea2af496a4c5"
       },
-      "overallRating": 4,
-      "healthAndSafetyRating": 4,
-      "repairsRating": 5,
+      "overallRating": 3,
+      "healthAndSafetyRating": 3,
+      "repairsRating": 3,
       "respectRating": 3,
-      "locationRating": 4,
-      "amenitiesRating": 4,
-      "writtenReview": "555 Elm Street",
+      "locationRating": 3,
+      "amenitiesRating": 3,
+      "writtenReview": "TESTINGGG",
       "propertyId": {
-        "$oid": "60b3d5f22b365d5c36f2b10f"
+        "$oid": "6478059b6312c402f2bd3ce3"
       },
       "__v": 0
     }

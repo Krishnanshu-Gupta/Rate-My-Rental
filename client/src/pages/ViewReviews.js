@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './ViewReviews.css';
 import { properties } from '../components/propertiesData';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStarHalfStroke as starHalf, faStar as starFull, faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faStar as starEmpt} from '@fortawesome/free-regular-svg-icons';
+import axios from 'axios';
 
-function ViewReviews({ property_id }) {
+
+function ViewReviews({ property }) {
+  // const [properties, setProperties] = useState([])
+  // useEffect(() => {
+  //   axios.get('http://localhost:3001/getReviews')
+  //     .then(response => {
+  //       const reviews = response.data;
+  //       setProperties(reviews);
+  //     })
+  //     .catch(error => {
+  //       console.error('Error retrieving reviews:', error);
+  //     });
+  // }, []);
+
   const filteredProperties = properties.filter(
-    (property) => property.propertyId.$oid === property_id
+    (prop) => prop.propertyId.$oid === property._id
   );
 
   const renderStarRating = (rating) => {
@@ -18,10 +35,104 @@ function ViewReviews({ property_id }) {
     );
   };
 
-
-  return (
-    // <p>Hiiiii</p>
+  return (    
     <div className="property-container">
+      <div className="title-address">
+										<div >{property.fullAddress}</div>
+			</div>
+    <div style = {{display: "flex", flexDirection: "row"}}>
+								<div id={`review-box-${property._id}`} className="review-box">
+									<div className="review-main">
+										<div className="review-name">
+											<div style = {{fontWeight: '600', fontSize: "18px"}}>{property.landlordName}</div>
+											<div style = {{paddingTop: "3px"}}>Total Reviews: {property.num_revs}</div>
+
+											{property.monthlyCostRange !== "" && <div className = "price-range" style = {{paddingTop: "40px"}}>{property.monthlyCostRange}</div>}
+										</div>
+										<div className="review-categs">
+											<span className="rating-stars">
+												<div className="review-stars-text">Overall</div>
+												<div style = {{paddingTop: "5px"}}>
+													{[
+														...Array(Math.floor(property.avg_ratings[0])).fill(<FontAwesomeIcon icon={starFull} color = "orange"/>),
+														...Array(Math.ceil(property.avg_ratings[0] - Math.floor(property.avg_ratings[0]))).fill(<FontAwesomeIcon icon={starHalf} color = "orange"/>),
+														...Array(5 - (
+															Math.floor(property.avg_ratings[0]) +
+															Math.ceil(property.avg_ratings[0] - Math.floor(property.avg_ratings[0]))
+														)).fill(<FontAwesomeIcon icon={starEmpt} color = "orange"/>)
+													]}
+												</div>
+											</span>
+											<span className="rating-stars">
+												<div className="review-stars-text">Safety</div>
+												<div style = {{paddingTop: "5px"}}>
+													{[
+														...Array(Math.floor(property.avg_ratings[1])).fill(<FontAwesomeIcon icon={starFull} color = "orange"/>),
+														...Array(Math.ceil(property.avg_ratings[1] - Math.floor(property.avg_ratings[1]))).fill(<FontAwesomeIcon icon={starHalf} color = "orange"/>),
+														...Array(5 - (
+															Math.floor(property.avg_ratings[1]) +
+															Math.ceil(property.avg_ratings[1] - Math.floor(property.avg_ratings[1]))
+														)).fill(<FontAwesomeIcon icon={starEmpt} color = "orange"/>)
+													]}
+												</div>
+											</span>
+											<span className="rating-stars">
+												<div className="review-stars-text">Repairs</div>
+												<div style = {{paddingTop: "5px"}}>
+													{[
+														...Array(Math.floor(property.avg_ratings[2])).fill(<FontAwesomeIcon icon={starFull} color = "orange"/>),
+														...Array(Math.ceil(property.avg_ratings[2] - Math.floor(property.avg_ratings[2]))).fill(<FontAwesomeIcon icon={starHalf} color = "orange"/>),
+														...Array(5 - (
+															Math.floor(property.avg_ratings[2]) +
+															Math.ceil(property.avg_ratings[2] - Math.floor(property.avg_ratings[2]))
+														)).fill(<FontAwesomeIcon icon={starEmpt} color = "orange"/>)
+													]}
+												</div>
+											</span>
+											<span className="rating-stars">
+												<div className="review-stars-text">Respect</div>
+												<div style = {{paddingTop: "5px"}}>
+													{[
+														...Array(Math.floor(property.avg_ratings[3])).fill(<FontAwesomeIcon icon={starFull} color = "orange"/>),
+														...Array(Math.ceil(property.avg_ratings[3] - Math.floor(property.avg_ratings[3]))).fill(<FontAwesomeIcon icon={starHalf} color = "orange"/>),
+														...Array(5 - (
+															Math.floor(property.avg_ratings[3]) +
+															Math.ceil(property.avg_ratings[3] - Math.floor(property.avg_ratings[3]))
+														)).fill(<FontAwesomeIcon icon={starEmpt} color = "orange"/>)
+													]}
+												</div>
+											</span>
+											<span className="rating-stars">
+												<div className="review-stars-text">Location</div>
+												<div style = {{paddingTop: "5px"}}>
+													{[
+														...Array(Math.floor(property.avg_ratings[4])).fill(<FontAwesomeIcon icon={starFull} color = "orange"/>),
+														...Array(Math.ceil(property.avg_ratings[4] - Math.floor(property.avg_ratings[4]))).fill(<FontAwesomeIcon icon={starHalf} color = "orange"/>),
+														...Array(5 - (
+															Math.floor(property.avg_ratings[4]) +
+															Math.ceil(property.avg_ratings[4] - Math.floor(property.avg_ratings[4]))
+														)).fill(<FontAwesomeIcon icon={starEmpt} color = "orange"/>)
+													]}
+												</div>
+											</span>
+											<span className="rating-stars">
+												<div className="review-stars-text">Amenities</div>
+												<div style = {{paddingTop: "5px"}}>
+													{[
+														...Array(Math.floor(property.avg_ratings[5])).fill(<FontAwesomeIcon icon={starFull} color = "orange"/>),
+														...Array(Math.ceil(property.avg_ratings[5] - Math.floor(property.avg_ratings[5]))).fill(<FontAwesomeIcon icon={starHalf} color = "orange"/>),
+														...Array(5 - (
+															Math.floor(property.avg_ratings[5]) +
+															Math.ceil(property.avg_ratings[5] - Math.floor(property.avg_ratings[5]))
+														)).fill(<FontAwesomeIcon icon={starEmpt} color = "orange"/>)
+													]}
+												</div>
+											</span>
+										</div>
+									</div>
+								</div>
+            </div>
+      <h3>Individual Reviews:</h3>
       {filteredProperties.map((property) => (
         <div className="property-box" key={property._id.$oid}>
           <div className="property-info">

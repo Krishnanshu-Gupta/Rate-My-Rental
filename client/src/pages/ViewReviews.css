@@ -61,3 +61,11 @@
 .overall-rating {
     font-weight: bold;
 }
+
+
+.title-address {
+  margin-top: 40px;
+  font-size: 30px;
+  color: #1b5f0f;
+  font-weight: bold;
+}

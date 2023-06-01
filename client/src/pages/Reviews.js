@@ -15,7 +15,12 @@ import { faStar as starEmpt} from '@fortawesome/free-regular-svg-icons';
 
 import { useLocation } from "react-router-dom";
 
-function Review() {
+function Review({ updateProperty }) {
+	const handleViewReviewsClick = (propertyToUpdate) => {
+    	updateProperty(propertyToUpdate);
+  	};
+
+
 	const markerRef = useRef([-120.6596, 35.2828]);
 	const [markerPosition, setMarkerPosition] = useState(markerRef.current);
 	const [address, setAddress] = useState("");
@@ -165,6 +170,7 @@ function Review() {
 				</div>
 				<div className="column right">
 					<div className="view-reviews">
+					{console.log(listOfProperties)}
 						{listOfProperties.map((property) => (
 							<div style = {{display: "flex", flexDirection: "row"}}>
 								<div id={`review-box-${property._id}`} className="review-box" style={{ border: selected === property._id ? "3px solid #91c949" : "",}}>
@@ -259,7 +265,13 @@ function Review() {
 									<div className="review-address">
 										<div >{property.fullAddress}</div>
 										<Link to="/view-reviews">
-											<button style={{ alignItems: "flex-end", marginLeft: "5px" }} className="visit-button">View Reviews</button>
+											<button 
+											style={{ alignItems: "flex-end", marginLeft: "5px" }} 
+											className="visit-button"
+											onClick={handleViewReviewsClick(property)}
+											>
+												View Reviews
+											</button>
 										</Link>
 									</div>
 								</div>
