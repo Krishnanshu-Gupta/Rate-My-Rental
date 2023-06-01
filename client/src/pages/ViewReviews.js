@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ViewReviews.css';
-import { properties } from '../components/propertiesData';
+// import { properties } from '../components/propertiesData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStarHalfStroke as starHalf, faStar as starFull, faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faStar as starEmpt} from '@fortawesome/free-regular-svg-icons';
@@ -8,22 +8,25 @@ import axios from 'axios';
 
 
 function ViewReviews({ property }) {
-  // const [properties, setProperties] = useState([])
-  // useEffect(() => {
-  //   axios.get('http://localhost:3001/getReviews')
-  //     .then(response => {
-  //       const reviews = response.data;
-  //       setProperties(reviews);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error retrieving reviews:', error);
-  //     });
-  // }, []);
+  console.log("ID: ", property._id)
+  const [properties, setProperties] = useState([])
 
-  console.log("PROPERTIES: ", property)
+  useEffect(() => {
+    axios.get('http://localhost:3001/getReviews')
+      .then(response => {
+        const reviews = response.data;
+        console.log("REVIEWS:", reviews)
+        setProperties(reviews);
+      })
+      .catch(error => {
+        console.error('Error retrieving reviews:', error);
+      });
+  }, []);
+
+  console.log("PROPERTIES: ", properties)
 
   const filteredProperties = properties.filter(
-    (prop) => prop.propertyId.$oid === property._id
+    (prop) => prop.propertyId === property._id
   );
 
   const renderStarRating = (rating) => {
@@ -135,6 +138,7 @@ function ViewReviews({ property }) {
 								</div>
             </div>
       <h3>Individual Reviews:</h3>
+      {console.log("FILTERED:", filteredProperties)}
       {filteredProperties.map((property) => (
         <div className="property-box" key={property._id.$oid}>
           <div className="property-info">
