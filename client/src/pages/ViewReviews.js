@@ -20,6 +20,8 @@ function ViewReviews({ property }) {
   //     });
   // }, []);
 
+  console.log("PROPERTIES: ", property)
+
   const filteredProperties = properties.filter(
     (prop) => prop.propertyId.$oid === property._id
   );

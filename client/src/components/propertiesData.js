@@ -120,10 +120,10 @@ export const properties = [
       "repairsRating": 2,
       "respectRating": 3,
       "locationRating": 3,
-      "amenitiesRating": 2,
+      "amenitiesRating": 3,
       "writtenReview": "555 Walnut Avenue",
       "propertyId": {
-        "$oid": "6478059b6312c402f2bd3ce3"
+        "$oid": "64781db5e5476923b7f9ae54"
       },
       "__v": 0
     },

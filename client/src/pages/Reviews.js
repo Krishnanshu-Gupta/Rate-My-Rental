@@ -264,11 +264,12 @@ function Review({ updateProperty }) {
 									</div>
 									<div className="review-address">
 										<div >{property.fullAddress}</div>
+										{console.log("PROPERTY IN REVIEWS: ", property)}
 										<Link to="/view-reviews">
 											<button 
 											style={{ alignItems: "flex-end", marginLeft: "5px" }} 
 											className="visit-button"
-											onClick={handleViewReviewsClick(property)}
+											onClick={() => handleViewReviewsClick(property)}
 											>
 												View Reviews
 											</button>

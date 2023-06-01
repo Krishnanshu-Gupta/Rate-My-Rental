@@ -18,30 +18,11 @@ function App() {
 		setIsPopupVisible(true);
 	};
 
-	const [property, serProperty] = useState({
-		"apartmentNumber": "",
-		"avg_ratings": [1, 1, 1, 1, 1, 1],
-		"city": "San Luis Obispo",
-		"country": "United States",
-		"fullAddress": "1237 Monte Vista Pl. Apt. 11, San Luis Obispo, CA 93405",
-		"landlordName": "Fiona",
-		"lat": -120.663216,
-		"long": 35.295945,
-		"monthlyCostRange": "$500-999",
-		"num_revs": 1,
-		"state": "CA",
-		"streetName": "1237 Monte Vista Pl. Apt. 11",
-		"zipCode": "93405",
-		"__v": 0,
-		"_id": "6477979c6f4b7321de81f4d3"
-	  }
-	)
+	const [property, serProperty] = useState({})
 
 	const updateProperty = (newProperty) => {
 		serProperty(newProperty);
-	  };
-
-	
+	};
 
 	return (
 		<Router>
