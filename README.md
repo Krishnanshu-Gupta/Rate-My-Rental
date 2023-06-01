@@ -8,6 +8,6 @@
 7. npm start the client
 
 
-**If you would like to access the database, install mongodb compass
+**If you would like to access the database, install mongodb compass**
 
 10. add this "mongodb+srv://hdeif:ratemyrental@ratemyrental.ztzbmvq.mongodb.net/RateMyRentalDB?retryWrites=true&w=majority” as the connection URI. you will now be able to go through the database and see data being added
