@@ -17,13 +17,13 @@ import { useLocation } from "react-router-dom";
 
 function Review({ updateProperty }) {
 	const handleViewReviewsClick = (propertyToUpdate) => {
-    	updateProperty(propertyToUpdate);
+    	updateProperty(propertyToUpdate); 
   	};
 
 
 	const markerRef = useRef([-120.6596, 35.2828]);
 	const [markerPosition, setMarkerPosition] = useState(markerRef.current);
-	const [address, setAddress] = useState("");
+	const [address, setAddress] = useState(""); 
 	const [selected, setSelected] = useState(-1);
 
 	const [listOfProperties, setListOfProperties] = useState([]);
