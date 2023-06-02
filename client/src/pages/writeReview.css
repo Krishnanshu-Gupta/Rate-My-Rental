@@ -233,13 +233,14 @@ label {
 
 .back-button {
   position: absolute;
-  top: 100px; /* Adjust the value to lower the button */
-  left: 10px;
-  color: #197032;
+  top: 105px; /* Adjust the value to lower the button */
+  left: 20px;
+  color: white;
   text-decoration: none;
   font-weight: bold;
   font-size: 16px;
-  background-color: #60a360;
+  background-color: #197032;
   padding: 10px 20px;
+  border-radius: 5px;
 }
 
