@@ -26,22 +26,22 @@ function App() {
 
 	return (
 		<Router>
+			<nav className="navbar">
+				<Link to="/" className="btn-home" style={{ fontWeight: 600 }}>
+					Home
+				</Link>
+				<h1 className="brand">RateMyRental</h1>
+				<Link to="/" className="btn-home" style={{ fontWeight: 600 }}>
+					About Us
+				</Link>
+				<Link to="/" className="btn-home" style={{ fontWeight: 600 }}>
+					Help
+				</Link>
+				<Link to="/" className="btn-home" style={{ fontWeight: 600 }} onClick={handleSignInClick}>
+					Sign in
+				</Link>
+			</nav>
 			<div className="page-container">
-				<nav className="navbar">
-					<Link to="/" className="btn-home" style={{ fontWeight: 600 }}>
-						Home
-					</Link>
-					<h1 className="brand">RateMyRental</h1>
-					<Link to="/" className="btn-home" style={{ fontWeight: 600 }}>
-						About Us
-					</Link>
-					<Link to="/" className="btn-home" style={{ fontWeight: 600 }}>
-						Help
-					</Link>
-					<Link to="/" className="btn-home" style={{ fontWeight: 600 }} onClick={handleSignInClick}>
-						Sign in
-					</Link>
-				</nav>
 				<Routes>
 					<Route index element={<Home />} />
 					<Route path="/home" element={<Home />} />

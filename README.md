@@ -1,12 +1,13 @@
-###### For Server (Backend)
-1. Open backend in one terminal (cd server)
-2. Create a new file called .env
-3. Paste this in the .env file with the MondoDB connection string URI:
-     REACT_APP_MONGO_URI="MondoDB connection string URI goes here"
-4. npm install
-5. npm start
+###### Instructions to access website (frontend and backend)
+1. First clone the repo “https://github.com/CSC307Spring2023/Team6.git”
+2. Execute this command in the terminal: git checkout integrate-all
+3. Execute this command in the terminal: git pull
+4. Execute this command in the terminal: cd server and in another: cd client
+5. In each folder: npm install —force
+6. npm start the server
+7. npm start the client
 
 
-6. Open frontend in one termind (cd client)
-7. npm install
-8. npm start
+**If you would like to access the database, install mongodb compass**
+
+10. add this "mongodb+srv://hdeif:ratemyrental@ratemyrental.ztzbmvq.mongodb.net/RateMyRentalDB?retryWrites=true&w=majority” as the connection URI. you will now be able to go through the database and see data being added
