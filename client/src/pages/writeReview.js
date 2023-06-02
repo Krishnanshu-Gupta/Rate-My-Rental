@@ -373,7 +373,10 @@ function WriteReview() {
 				<div>
 			<h2>Review Your Stay</h2>
 			<div className="form-group">
-					<label htmlFor="monthlyCostRange">Monthly Cost Range:</label>
+					<div style = {{display: "flex", flexDirection: "row"}}>
+						<label htmlFor="monthlyCostRange">Monthly Cost Range:</label>
+						<label style = {{fontStyle: "italic", fontWeight: "300", paddingLeft: "5px"}}>(Optional)</label>
+					</div>
 					<div className="dropdown">
 						<button className="dropdown-button" onClick={() => setShowDropdown(!showDropdown)}>
 							{monthlyCostRange ? monthlyCostRange : 'Select a range'} <span>&#9662;</span>

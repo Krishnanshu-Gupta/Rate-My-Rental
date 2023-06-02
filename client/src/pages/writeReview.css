@@ -90,15 +90,15 @@ label {
 }
 
 .document-upload {
-  margin-top: 50px;
+  margin-top: 10px;
   padding: 20px;
+  padding-top: 0px;
   background-color: rgb(219, 217, 217);
   border-radius: 10px;
 }
 
 .review-section {
   margin-top: 50px;
-  padding: 20px;
   background-color: #f2f2f2;
   border-radius: 10px;
 }
