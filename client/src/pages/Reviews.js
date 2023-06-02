@@ -17,13 +17,13 @@ import { useLocation } from "react-router-dom";
 
 function Review({ updateProperty }) {
 	const handleViewReviewsClick = (propertyToUpdate) => {
-    	updateProperty(propertyToUpdate); 
+    	updateProperty(propertyToUpdate);
   	};
 
 
 	const markerRef = useRef([-120.6596, 35.2828]);
 	const [markerPosition, setMarkerPosition] = useState(markerRef.current);
-	const [address, setAddress] = useState(""); 
+	const [address, setAddress] = useState("");
 	const [selected, setSelected] = useState(-1);
 
 	const [listOfProperties, setListOfProperties] = useState([]);
@@ -83,13 +83,6 @@ function Review({ updateProperty }) {
 		})
 
 		map.on('load', () => {
-			map.loadImage(
-				'https://cdn-icons-png.flaticon.com/64/3203/3203002.png',
-				(error, image) => {
-				if (error) throw error;
-					map.addImage('custom-marker', image);
-				}
-			);
 			const properties = [];
 			tempList.forEach((property) => {//data.properties.forEach((property, i) => {
 				var coords = [property.lat, property.long];
@@ -266,8 +259,8 @@ function Review({ updateProperty }) {
 										<div >{property.fullAddress}</div>
 										{console.log("PROPERTY IN REVIEWS: ", property)}
 										<Link to="/view-reviews">
-											<button 
-											style={{ alignItems: "flex-end", marginLeft: "5px" }} 
+											<button
+											style={{ alignItems: "flex-end", marginLeft: "5px" }}
 											className="visit-button"
 											onClick={() => handleViewReviewsClick(property)}
 											>
