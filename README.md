@@ -4,10 +4,10 @@
 3. Execute this command in the terminal: git pull
 4. Execute this command in the terminal: cd server and in another: cd client
 5. In each folder: npm install —force
-6. npm start the server
-7. npm start the client
+6. npm start the server (Starts Backend)
+7. npm start the client (Starts Frontend)
 
 
 **If you would like to access the database, install mongodb compass**
 
-10. add this "mongodb+srv://hdeif:ratemyrental@ratemyrental.ztzbmvq.mongodb.net/RateMyRentalDB?retryWrites=true&w=majority” as the connection URI. you will now be able to go through the database and see data being added
+8. add this "mongodb+srv://hdeif:ratemyrental@ratemyrental.ztzbmvq.mongodb.net/RateMyRentalDB?retryWrites=true&w=majority” as the connection URI. you will now be able to go through the database and see data being added
