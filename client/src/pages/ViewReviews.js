@@ -6,11 +6,25 @@ import { faStarHalfStroke as starHalf, faStar as starFull, faCircleArrowRight } 
 import { faStar as starEmpt} from '@fortawesome/free-regular-svg-icons';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 
-function ViewReviews({ property }) {
-  console.log("ID: ", property._id)
+
+
+const ViewReviews = () => {
+	const location = useLocation();
+	const property = location.state?.property;
+	const navigate = useNavigate();
+
+
+	const handleGoBack = () => {
+		navigate(-1);
+	};
+	  
+
+
   const [properties, setProperties] = useState([])
 
   useEffect(() => {
@@ -44,10 +58,9 @@ function ViewReviews({ property }) {
 
   return (    
     <div className="property-container">
-	<Link 
-		to="/reviews" className="back-button">&#8249; 
-		Back
-	</Link>
+	<button onClick={handleGoBack} className="back-button">
+      &lt; Back
+    </button>
       <div className="title-address">
 		<div >{property.fullAddress}</div>
 		</div>

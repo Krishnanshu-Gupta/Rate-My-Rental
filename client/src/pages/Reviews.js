@@ -6,6 +6,10 @@ import 'mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from 'mapbox-gl-geocoder';
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
+
 
 
 import data from './example.json';
@@ -13,12 +17,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStarHalfStroke as starHalf, faStar as starFull, faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faStar as starEmpt} from '@fortawesome/free-regular-svg-icons';
 
-import { useLocation } from "react-router-dom";
-
 function Review({ updateProperty }) {
-	const handleViewReviewsClick = (propertyToUpdate) => {
-    	updateProperty(propertyToUpdate);
-  	};
+	const navigate = useNavigate();
+
+  const handleViewReviewsClick = (property) => {
+    navigate('/view-reviews', { state: { property } });
+  };
+
+	// const handleViewReviewsClick = (propertyToUpdate) => {
+    // 	updateProperty(propertyToUpdate);
+  	// };
 
 
 	const markerRef = useRef([-120.6596, 35.2828]);
@@ -256,17 +264,14 @@ function Review({ updateProperty }) {
 										</div>
 									</div>
 									<div className="review-address">
-										<div >{property.fullAddress}</div>
-										{console.log("PROPERTY IN REVIEWS: ", property)}
-										<Link to="/view-reviews">
-											<button
+										<div>{property.fullAddress}</div>
+										<button
 											style={{ alignItems: "flex-end", marginLeft: "5px" }}
 											className="visit-button"
 											onClick={() => handleViewReviewsClick(property)}
-											>
-												View Reviews
-											</button>
-										</Link>
+										>
+											View Reviews
+										</button>
 									</div>
 								</div>
 							</div>
