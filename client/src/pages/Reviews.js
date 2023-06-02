@@ -5,30 +5,14 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import 'mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from 'mapbox-gl-geocoder';
-import { Link } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 
-
-
-
-import data from './example.json';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStarHalfStroke as starHalf, faStar as starFull, faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faStarHalfStroke as starHalf, faStar as starFull, faFlag } from '@fortawesome/free-solid-svg-icons';
 import { faStar as starEmpt} from '@fortawesome/free-regular-svg-icons';
 
-function Review({ updateProperty }) {
-	const navigate = useNavigate();
+import { useLocation, useNavigate, Link } from "react-router-dom";
 
-  const handleViewReviewsClick = (property) => {
-    navigate('/view-reviews', { state: { property } });
-  };
-
-	// const handleViewReviewsClick = (propertyToUpdate) => {
-    // 	updateProperty(propertyToUpdate);
-  	// };
-
-
+function Review() {
 	const markerRef = useRef([-120.6596, 35.2828]);
 	const [markerPosition, setMarkerPosition] = useState(markerRef.current);
 	const [address, setAddress] = useState("");
@@ -37,8 +21,10 @@ function Review({ updateProperty }) {
 	const [listOfProperties, setListOfProperties] = useState([]);
 
 	const location = useLocation();
-	const addressToAutofill = location.state.address;
+	const navigate = useNavigate();
 
+	var addressToAutofill = "";
+	if(location.state && location.state.address) addressToAutofill = location.state.address;
 
 	useEffect(() => {
 		mapboxgl.accessToken = "pk.eyJ1Ijoia3Jpc2huYW5zaHUiLCJhIjoiY2xoang2a29nMG04MjNpbXQ3MmRoNWw3ZyJ9.i4zaDfrRa3VIWW3FAuAFtw";
@@ -264,11 +250,10 @@ function Review({ updateProperty }) {
 										</div>
 									</div>
 									<div className="review-address">
-										<div>{property.fullAddress}</div>
-										<button
-											style={{ alignItems: "flex-end", marginLeft: "5px" }}
+										<div >{property.fullAddress}</div>
+										<button style={{ alignItems: "flex-end", marginLeft: "5px" }}
 											className="visit-button"
-											onClick={() => handleViewReviewsClick(property)}
+											onClick={() => navigate("/view-reviews", { state: { property: property } })}
 										>
 											View Reviews
 										</button>
