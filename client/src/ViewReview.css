@@ -1,3 +1,143 @@
+<<<<<<< Updated upstream:client/src/ViewReview.css
+=======
+.Reviews {
+	text-align: center;
+	align-items: flex-start;
+	flex-direction: column;
+	width: 100vw;
+	height: 100%;
+	display: flex;
+}
+
+.App-logo {
+	height: 40vmin;
+	pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.App-logo {
+		animation: App-logo-spin infinite 20s linear;
+	}
+}
+
+.App-header {
+	background-color: #282c34;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
+}
+
+.App-link {
+	color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.signup {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	margin: 10px;
+	padding: 10px;
+}
+
+.title {
+	color: blue;
+	font-size: 70px;
+	font-family:'Courier New', Courier, monospace;
+}
+
+.moto {
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	align-items: center;
+	color: gray;
+}
+
+.map {
+	margin: 0 auto;
+	width: 100%;
+	height: 100%;
+}
+
+.mapbox-improve-map {
+	display: none;
+}
+
+.mapboxgl-ctrl-attrib-inner {
+	display: none;
+}
+
+.mapboxgl-ctrl-attrib-button {
+	display: none;
+}
+
+.mapboxgl-ctrl-top-left {
+	width: 100vw;
+}
+
+.mapboxgl-ctrl-geocoder mapboxgl-ctrl {
+	width: 100vw;
+}
+
+.geocoder {
+	position: absolute;
+	z-index: 1;
+	width: 100%;
+	top: 10px;
+}
+
+.mapboxgl-ctrl-geocoder {
+	width: 100vw;
+}
+
+.review-container {
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+	display: flex;
+}
+
+.column {
+	float: left;
+}
+
+.left {
+	width: 60%;
+	overflow: hidden;
+}
+
+.right {
+	width: 40%;
+	align-items: center;
+	justify-content: center;
+	overflow-y: auto;
+}
+
+@media screen and (max-width: 600px) {
+	.column {
+	  	width: 100%;
+	}
+}
+
+
+
+>>>>>>> Stashed changes:client/src/pages/Reviews.css
 body {
 	font-family: Arial, sans-serif;
 	margin: 0;
