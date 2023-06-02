@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStarHalfStroke as starHalf, faStar as starFull, faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faStar as starEmpt} from '@fortawesome/free-regular-svg-icons';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 
 
 function ViewReviews({ property }) {
@@ -42,9 +44,13 @@ function ViewReviews({ property }) {
 
   return (    
     <div className="property-container">
+	<Link 
+		to="/reviews" className="back-button">&#8249; 
+		Back
+	</Link>
       <div className="title-address">
-										<div >{property.fullAddress}</div>
-			</div>
+		<div >{property.fullAddress}</div>
+		</div>
     <div style = {{display: "flex", flexDirection: "row"}}>
 								<div id={`review-box-${property._id}`} className="review-box">
 									<div className="review-main">

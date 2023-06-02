@@ -231,5 +231,15 @@ label {
   background-color: #f1f1f1;
 }
 
-
+.back-button {
+  position: absolute;
+  top: 100px; /* Adjust the value to lower the button */
+  left: 10px;
+  color: #197032;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  background-color: #60a360;
+  padding: 10px 20px;
+}
 
