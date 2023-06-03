@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const UserModel = require("./models/Users");
 const ReviewModel = require("./models/Reviews")
 const PropertyModel = require("./models/Properties");
+const ReportModel = require("./models/Reports");
 const Axios = require("axios");
 // import "/client/src/pages/writeReview.js"
 
@@ -81,6 +82,24 @@ app.put("/updateProperty/:id", async(req, res) => {
     new: true
   });
   res.json(updatedProperty);
+});
+
+app.get("/getReports", (req, res) => {
+  ReportModel.find({}, (err, result) => {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+app.post("/createReport", async(req, res) => {
+  const report = req.body;
+  const newReport = new ReportModel(report);
+  await newReport.save();
+
+  res.json(newReport);
 });
 
 app.listen(3001, () => {

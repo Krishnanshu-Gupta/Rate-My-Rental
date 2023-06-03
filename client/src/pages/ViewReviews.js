@@ -28,6 +28,7 @@ function ViewReviews() {
 	}
 
 	const [properties, setProperties] = useState([])
+	const [reports, setReports] = useState([])
 	const [reportText, setReportText] = useState('');
 
 	useEffect(() => {
@@ -36,6 +37,16 @@ function ViewReviews() {
 			const reviews = response.data;
 			//console.log("REVIEWS:", reviews)
 			setProperties(reviews);
+		})
+		.catch(error => {
+			console.error('Error retrieving reviews:', error);
+		});
+
+		axios.get('http://localhost:3001/getReports')
+		.then(response => {
+			const reports = response.data;
+			//console.log("REVIEWS:", reviews)
+			setReports(reports);
 		})
 		.catch(error => {
 			console.error('Error retrieving reviews:', error);
@@ -59,8 +70,21 @@ function ViewReviews() {
 		);
 	};
 
-	function handleReport(){
-		console.log(reportText)
+	const handleReport = (reviewId) => {
+		axios.post("http://localhost:3001/createReport", {
+				reportText,
+				reviewId, 
+			}).then((response) => {
+				setReports([
+					...reports,
+					{
+						reportText,
+						reviewId,
+					},
+				]);
+			}).catch((error) => {
+				console.log(error);
+			});
 	}
 
   	return (
@@ -170,7 +194,7 @@ function ViewReviews() {
 			</>
 			)}
 			<h3>Reviews</h3>
-			{console.log("FILTERED:", filteredProperties)}
+			{/* {console.log("FILTERED:", filteredProperties)} */}
 			{filteredProperties.map((property) => (
 				<div style = {{flexDirection: "row", display: "flex"}}>
 					<div className="property-box" key={property._id.$oid}>
@@ -224,7 +248,7 @@ function ViewReviews() {
 												style = {{width: "100%", height: "100%", boxSizing: "border-box", padding: "10px"}}/>
 										</div>
 										<button onClick = {() => {
-											handleReport();
+											handleReport(property._id);
 											close();}} style = {{width: "100px", borderRadius: "0.25rem", fontSize: "0.875rem", fontWeight: "500", border: "0.0625rem solid transparent", margin: "auto", padding: "10px", backgroundColor: "#0b57d0", color: "white"}}>Submit</button>
 									</div>
 								</div>
