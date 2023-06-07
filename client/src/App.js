@@ -50,13 +50,13 @@ function App() {
 					<Route path="/home" element={<Home />} />
 					{/* <Route path="/write-review" element={<WriteReview />} /> */}
 					{attemptLogin ? (
-					<Route
-						path="/write-review"
-						element={<WriteReview />}
-					/>
-					) : (
-					<Route path="/write-review" element={<Navigate to="/" />} />
-					)}
+						<Route path="/write-review" element={<WriteReview />} />
+						) : (
+							<Route
+								path="/write-review"
+								element={<Navigate to="/" />}
+							/>
+						)}
 					<Route path="/reviews" element={<Reviews updateProperty={updateProperty}/>} />
 					<Route path="/view-reviews" element={<ViewReviews property={property}/>} />
 				</Routes>

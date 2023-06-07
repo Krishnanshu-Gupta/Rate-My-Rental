@@ -9,7 +9,7 @@ const LoginSignupPage = ({ onClose }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [activeTab, setActiveTab] = useState('signin');
-  
+
   const [listOfUsers, setListOfUsers] = useState([]);
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -31,11 +31,10 @@ const LoginSignupPage = ({ onClose }) => {
 		Axios.get("http://localhost:3001/getUsers").then((response) => {
 			setListOfUsers(response.data);
 		});
-		
+
 	}, []);
 
   const createUser = async () => {
-
     Axios.post("http://localhost:3001/createUser", {
 				email,
         password
@@ -49,7 +48,7 @@ const LoginSignupPage = ({ onClose }) => {
 				]);
 
 				console.log("Just created an account, " + response.data._id);
-				
+
         alert("Account created successfully. Please log in now.");
         console.log(listOfUsers);
 			}).catch((error) => {
@@ -79,7 +78,9 @@ const LoginSignupPage = ({ onClose }) => {
       if(isValidLogin) {
         console.log("bye");
         setAttemptLogin(true);
-        navigate("/reviews");
+        onClose()
+        navigate("/");
+        alert("Logged in successfully!")
       } else {
         console.log("hello");
         alert("Invalid login credentials, try again");
