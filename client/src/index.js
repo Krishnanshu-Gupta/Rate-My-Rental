@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Reviews from "./Reviews";
+import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Reviews />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
