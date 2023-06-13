@@ -22,7 +22,8 @@ function Review() {
 
 	const location = useLocation();
 	const navigate = useNavigate();
-
+   
+	
 	var addressToAutofill = "";
 	if(location.state && location.state.address) addressToAutofill = location.state.address;
 
