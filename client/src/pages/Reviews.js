@@ -26,7 +26,7 @@ function Review() {
 	
 	var addressToAutofill = "";
 	if(location.state && location.state.address) addressToAutofill = location.state.address;
-	//difference between main and with-login branch.
+	//between main and with-login branch.
 	useEffect(() => {
 		mapboxgl.accessToken = "pk.eyJ1Ijoia3Jpc2huYW5zaHUiLCJhIjoiY2xoang2a29nMG04MjNpbXQ3MmRoNWw3ZyJ9.i4zaDfrRa3VIWW3FAuAFtw";
 		const map = new mapboxgl.Map({
