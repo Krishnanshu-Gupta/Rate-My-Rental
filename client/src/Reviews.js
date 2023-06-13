@@ -20,7 +20,6 @@ function Review() {
 	const [address, setAddress] = useState("");
 	const [selected, setSelected] = useState(-1);
 
-<<<<<<< Updated upstream:client/src/Reviews.js
 	const convertAddressToCoordinates = async (address) => {
 		const MAPBOX_API_KEY = 'pk.eyJ1Ijoia3Jpc2huYW5zaHUiLCJhIjoiY2xoang2a29nMG04MjNpbXQ3MmRoNWw3ZyJ9.i4zaDfrRa3VIWW3FAuAFtw'; // Replace with your Mapbox API key
 
