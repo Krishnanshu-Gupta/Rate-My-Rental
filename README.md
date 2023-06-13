@@ -1,6 +1,6 @@
 ###### Instructions to access website (frontend and backend)
 1. First clone the repo “https://github.com/CSC307Spring2023/Team6.git”
-2. Execute this command in the terminal: git checkout integrate-all
+2. Execute this command in the terminal: git checkout with-login
 3. Execute this command in the terminal: git pull
 4. Execute this command in the terminal: cd server and in another: cd client
 5. In each folder: npm install —force
