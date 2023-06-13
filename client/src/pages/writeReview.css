@@ -90,15 +90,15 @@ label {
 }
 
 .document-upload {
-  margin-top: 50px;
+  margin-top: 10px;
   padding: 20px;
+  padding-top: 0px;
   background-color: rgb(219, 217, 217);
   border-radius: 10px;
 }
 
 .review-section {
   margin-top: 50px;
-  padding: 20px;
   background-color: #f2f2f2;
   border-radius: 10px;
 }
@@ -231,5 +231,17 @@ label {
   background-color: #f1f1f1;
 }
 
-
+.back-button {
+  position: absolute;
+  top: 105px; /* Adjust the value to lower the button */
+  left: 20px;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  background-color: #197032;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+}
 

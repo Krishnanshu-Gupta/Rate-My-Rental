@@ -1,0 +1,104 @@
+.property-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.property-box {
+  display: flex;
+  border: 2px solid #0c5a21;
+  border-radius: 10px;
+  padding: 20px;
+  width: 1000px;
+  margin-bottom: 20px;
+  background-color: #c3d6c7;
+}
+
+.property-info {
+  width: 50%;
+  display: flex;
+}
+
+.left-half,
+.right-half {
+  flex: 1;
+}
+
+.ratings-section {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+}
+
+.property-info h3 {
+  margin-top: 0;
+}
+
+.property-info p {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.property-info p .star-rating {
+  color: #d9b526;
+  margin-left: 5px;
+}
+
+.written-review h3 {
+  margin-top: 0;
+}
+
+.written-review p {
+  margin-bottom: 8px;
+}
+
+.overall-rating {
+    font-weight: bold;
+}
+
+
+.title-address {
+  margin-top: 40px;
+  font-size: 30px;
+  color: #1b5f0f;
+  font-weight: bold;
+}
+
+.modal {
+  font-size: 12px;
+}
+.modal > .header {
+  width: 100%;
+  border-bottom: 1px solid gray;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+.modal > .content {
+  width: 100%;
+  padding: 10px 5px;
+}
+.modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}

@@ -1,0 +1,322 @@
+.Reviews {
+	text-align: center;
+	align-items: flex-start;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	display: flex;
+}
+
+.App-logo {
+	height: 40vmin;
+	pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.App-logo {
+		animation: App-logo-spin infinite 20s linear;
+	}
+}
+
+.App-header {
+	background-color: #282c34;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
+}
+
+.App-link {
+	color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.signup {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	margin: 10px;
+	padding: 10px;
+}
+
+.title {
+	color: blue;
+	font-size: 70px;
+	font-family:'Courier New', Courier, monospace;
+}
+
+.moto {
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	align-items: center;
+	color: gray;
+}
+
+.map {
+	margin: 0 auto;
+	width: 100%;
+	height: 100%;
+}
+
+.mapbox-improve-map {
+	display: none;
+}
+
+.mapboxgl-ctrl-attrib-inner {
+	display: none;
+}
+
+.mapboxgl-ctrl-attrib-button {
+	display: none;
+}
+
+.mapboxgl-ctrl-top-left {
+	width: 100vw;
+}
+
+.mapboxgl-ctrl-geocoder mapboxgl-ctrl {
+	width: 100vw;
+}
+
+.geocoder {
+	position: absolute;
+	z-index: 1;
+	width: 100%;
+	top: 10px;
+}
+
+.mapboxgl-ctrl-geocoder {
+	width: 100vw;
+}
+
+.review-container {
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+	display: flex;
+}
+
+.column {
+	float: left;
+}
+
+.left {
+	width: 60%;
+	overflow: hidden;
+}
+
+.right {
+	width: 40%;
+	align-items: center;
+	justify-content: center;
+	overflow-y: auto;
+}
+
+@media screen and (max-width: 600px) {
+	.column {
+	  	width: 100%;
+	}
+}
+
+
+
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+}
+
+.view-reviews {
+	font-family: Verdana;
+	display: flex;
+	font-size: 15px;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 5%;
+	margin-top: 10px;
+}
+
+.view-reviews .item {
+	border-bottom: 1px solid #eee;
+	padding: 10px;
+	text-decoration: none;
+  }
+
+.review-box {
+	width: 535px;
+	padding: 20px;
+	border-bottom: 1px solid #ccc;
+}
+
+.review-stars-text {
+	font-weight: 600;
+}
+
+.review-main {
+	display: flex;
+	flex-direction: row;
+}
+
+.review-name {
+	width: 150px;
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+}
+
+.review-categs {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	padding: 13px 0px 5px 25px;
+	column-gap: 20px;
+	row-gap: 10px;
+}
+
+.review-address {
+	display: flex;
+	flex-direction: row;
+	text-align: left;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.visit-button {
+	padding: 10px 20px;
+	background-color: white;
+	border: 1px solid #ccc;
+	color: black;
+	font-size: 13px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.price-range {
+	background: linear-gradient(to right, #ff9f1a, #ff1a1a);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.entry-box {
+	background-color: #f0f0f0;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 40px;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+}
+
+.landlord-details {
+	flex: 1;
+	margin-right: 20px;
+}
+
+.landlord-details p {
+	margin: 0 0 10px;
+}
+
+.rating-stars {
+	display: inline-block;
+	padding: 10px 0px 10px 0px;
+}
+
+.rating-stars span {
+	font-size: 20px;
+	color: orange;
+}
+
+.filter-rating-stars {
+	display: inline-block;
+}
+
+.filter-rating-stars span {
+	font-size: 20px;
+	color: orange;
+}
+
+.filter-rating-stars:hover span {
+	color: yellow;
+}
+
+.rating-text {
+	font-size: 20px;
+	color: black;
+}
+
+.reviews {
+	flex: 1;
+}
+
+.review-wrapper {
+	margin-bottom: 20px;
+	margin-left: 3px;
+}
+
+.report-review {
+	margin-top: 20px;
+	text-align: right;
+}
+
+.report-review p {
+	margin-bottom: 10px;
+}
+
+.report-button {
+	padding: 10px 20px;
+	background-color: #000000;
+	color: white;
+	border: none;
+	border-radius: 20px;
+	cursor: pointer;
+}
+
+
+
+
+  .mapboxgl-popup-close-button {
+	display: none;
+  }
+  .mapboxgl-popup-content {
+	font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', sans-serif;
+	padding: 0px !important;
+  }
+
+  .mapboxgl-popup-content h3 {
+	background: #91c949;
+	color: #fff;
+	width: 100%;
+	height: 50%;
+	border-radius: 3px 3px 0 0;
+	padding: 10px 0px;
+	margin: 0px;
+	font-weight: 700;
+  }
+
+  .mapboxgl-popup-content h4 {
+	margin: 0;
+	font-weight: 400;
+	padding: 10px 5px;
+  }
+
+  .mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
+	border-bottom-color: #91c949;
+  }
+
+
