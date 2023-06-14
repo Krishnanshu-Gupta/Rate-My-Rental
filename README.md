@@ -10,6 +10,7 @@
 
 
 **If you would like to access the database, install mongodb compass**
+
 Install MongoDB Compass from here: `https://www.mongodb.com/try/download/compass`
 
 7. Add `mongodb+srv://hdeif:ratemyrental@ratemyrental.ztzbmvq.mongodb.net/RateMyRentalDB?retryWrites=true&w=majority` as the connection URI. You will now be able to go through the database and see data being added.
@@ -18,3 +19,5 @@ Common Issues:
 
 You may get an openssl issue due to being on a different version of npm. To solve this, paste this command before running npm start on the client:
 `export NODE_OPTIONS=--openssl-legacy-provider`
+
+For a video walkthrough of running the application: `https://drive.google.com/file/d/1ZT14Lyx5rlNqrz8lmabW7i2DnGNOr6hL/view?usp=sharing`
