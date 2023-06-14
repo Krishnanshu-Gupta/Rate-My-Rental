@@ -224,7 +224,7 @@ function WriteReview() {
 				console.log(error);
 			});
 		}
-
+		navigate("/");
 	};
 
 	const createReview = (propertyId) => {
@@ -254,7 +254,6 @@ function WriteReview() {
 					propertyId,
 				},
 			]);
-			navigate("/");
 			return response.insertedId;
 		});
 

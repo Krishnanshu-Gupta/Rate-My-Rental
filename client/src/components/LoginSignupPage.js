@@ -122,6 +122,7 @@ const LoginSignupPage = ({ onClose }) => {
           </label>
           {activeTab === 'newaccount' && (
             <div className="password-validation">
+              <h1 style = {{ fontSize: "17px", margin: 0}} className="password-validation-text">We recommend using a password with:</h1>
               <p className="password-validation-text">At least 8 characters</p>
               <p className="password-validation-text">Mix of letters and numbers</p>
               <p className="password-validation-text">At least 1 special character</p>
