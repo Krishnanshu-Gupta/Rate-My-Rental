@@ -1,13 +1,18 @@
 ###### Instructions to access website (frontend and backend)
-1. First clone the repo “https://github.com/CSC307Spring2023/Team6.git”
-2. Execute this command in the terminal: git checkout with-login
-3. Execute this command in the terminal: git pull
-4. Execute this command in the terminal: cd server and in another: cd client
-5. In each folder: npm install —force
-6. npm start the server
-7. npm start the client
+1. First clone the repo with this command: `git clone https://github.com/CSC307Spring2023/Team6.git`
+2. Execute this command in the terminal: `git pull`
+3. Execute this command in the terminal (backend): `cd server` and in another terminal (frontend): `cd client`
+4. In each folder: `npm install —force`
+5. in the server folder, `npm start`
+6. in the client folder, `npm start`
 
 
 **If you would like to access the database, install mongodb compass**
+Install MongoDB Compass from here: `https://www.mongodb.com/try/download/compass`
 
-10. add this "mongodb+srv://hdeif:ratemyrental@ratemyrental.ztzbmvq.mongodb.net/RateMyRentalDB?retryWrites=true&w=majority” as the connection URI. you will now be able to go through the database and see data being added
+7. add this "mongodb+srv://hdeif:ratemyrental@ratemyrental.ztzbmvq.mongodb.net/RateMyRentalDB?retryWrites=true&w=majority” as the connection URI. You will now be able to go through the database and see data being added.
+
+Common Issues:
+
+You may get an openssl issue due to being on a different version of npm. To solve this, paste this command before running npm start on the client:
+`export NODE_OPTIONS=--openssl-legacy-provider`
