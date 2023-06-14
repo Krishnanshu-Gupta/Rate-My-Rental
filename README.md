@@ -20,4 +20,6 @@ Common Issues:
 You may get an openssl issue due to being on a different version of npm. To solve this, paste this command before running npm start on the client:
 `export NODE_OPTIONS=--openssl-legacy-provider`
 
-For a video walkthrough of running the application: `https://drive.google.com/file/d/1ZT14Lyx5rlNqrz8lmabW7i2DnGNOr6hL/view?usp=sharing`
+If port 3001 is being used and was not properly terminated, please use this command to kill node: `sudo killall -9 node`
+
+For a video walkthrough of running the application: https://drive.google.com/file/d/1ZT14Lyx5rlNqrz8lmabW7i2DnGNOr6hL/view?usp=sharing
