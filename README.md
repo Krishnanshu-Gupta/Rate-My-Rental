@@ -6,6 +6,8 @@
 5. in the server folder, `npm start`
 6. in the client folder, `npm start`
 
+**Please be sure than server is run on port 3001 and client is run on port 3000**
+
 
 **If you would like to access the database, install mongodb compass**
 Install MongoDB Compass from here: `https://www.mongodb.com/try/download/compass`
