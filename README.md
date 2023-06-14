@@ -10,7 +10,7 @@
 **If you would like to access the database, install mongodb compass**
 Install MongoDB Compass from here: `https://www.mongodb.com/try/download/compass`
 
-7. Add '"mongodb+srv://hdeif:ratemyrental@ratemyrental.ztzbmvq.mongodb.net/RateMyRentalDB?retryWrites=true&w=majority”' as the connection URI. You will now be able to go through the database and see data being added.
+7. Add `mongodb+srv://hdeif:ratemyrental@ratemyrental.ztzbmvq.mongodb.net/RateMyRentalDB?retryWrites=true&w=majority` as the connection URI. You will now be able to go through the database and see data being added.
 
 Common Issues:
 
