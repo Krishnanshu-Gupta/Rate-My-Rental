@@ -1,3 +1,7 @@
+# Rate-My-Rental
+Community platform for renters to review their landlords/rental units by sharing their experiences for future renters.
+
+
 ###### Instructions to access website (frontend and backend)
 1. First clone the repo with this command: `git clone https://github.com/CSC307Spring2023/Team6.git`
 2. Execute this command in the terminal: `git pull`
